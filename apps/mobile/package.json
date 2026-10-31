@@ -50,7 +50,8 @@
     "start": "expo start",
     "android": "expo run:android",
     "typecheck": "tsc --noEmit",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "eas-build-post-install": "npm run build -w @sw/shared"
   },
   "private": true,
   "expo": {
