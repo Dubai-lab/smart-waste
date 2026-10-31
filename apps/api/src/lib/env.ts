@@ -17,5 +17,6 @@ const schema = z.object({
   PUBLIC_API_URL: z.string().url().optional(),
 });
 
-export const env = schema.parse(process.env);
+// Hosting dashboards often save untouched fields as empty strings; treat those as unset.
+export const env = schema.parse(Object.fromEntries(Object.entries(process.env).filter(([, v]) => v !== '')));
 export const momoConfigured = Boolean(env.MOMO_SUBSCRIPTION_KEY && env.MOMO_API_USER && env.MOMO_API_KEY);
