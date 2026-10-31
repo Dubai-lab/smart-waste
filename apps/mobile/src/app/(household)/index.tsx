@@ -10,7 +10,7 @@ import { useT } from '../../lib/i18n';
 import { useRealtimeInvalidate } from '../../lib/useRealtime';
 import { day, money, time } from '../../lib/format';
 import { Badge, Button, Card, IconCircle, QueryState, Row, Screen, Text } from '../../components/ui';
-import { useColors } from '../../lib/theme';
+import { font, useColors } from '../../lib/theme';
 
 export default function Home() {
   const c = useColors();
@@ -83,12 +83,12 @@ export default function Home() {
               <Card index={2} grow onPress={() => router.push('/(household)/pay')} accessibilityLabel={t('pay')}>
                 <IconCircle icon={Wallet} color={s.unpaid_invoice ? c.warning : c.success} bg={s.unpaid_invoice ? c.warningSoft : c.successSoft} size={36} />
                 <Text variant="caption" muted>{s.unpaid_invoice ? t('billDue') : t('allPaid')}</Text>
-                <Text variant="title" style={{ fontFamily: 'FiraCode_500Medium' }}>{money(s.unpaid_invoice ? s.unpaid_invoice.amount_due : 0)}</Text>
+                <Text variant="title" style={{ fontFamily: font.mono }}>{money(s.unpaid_invoice ? s.unpaid_invoice.amount_due : 0)}</Text>
               </Card>
               <Card index={3} grow onPress={() => router.push('/leaderboard')} accessibilityLabel={t('points')}>
                 <IconCircle icon={Gift} color={c.primaryStrong} bg={c.primarySoft} size={36} />
                 <Text variant="caption" muted>{t('points')}</Text>
-                <Text variant="title" style={{ fontFamily: 'FiraCode_500Medium' }}>{s.points}</Text>
+                <Text variant="title" style={{ fontFamily: font.mono }}>{s.points}</Text>
                 <Text variant="small" muted>{t('worth', { v: s.points * s.point_value_rwf })}</Text>
               </Card>
             </Row>

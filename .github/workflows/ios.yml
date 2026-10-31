@@ -1,0 +1,56 @@
+# Builds an unsigned iPhone app (.ipa) for testing with Sideloadly (free Apple ID, re-install every 7 days).
+# Push notifications need a paid Apple Developer account, so they don't work in this build; everything else does.
+# Run it from GitHub → Actions → "iOS build (unsigned)" → Run workflow, then download the artifact.
+name: iOS build (unsigned)
+on:
+  workflow_dispatch:
+
+jobs:
+  ipa:
+    runs-on: macos-26
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci --include=dev
+      - run: npm run build -w @sw/shared
+
+      - name: App settings (baked into the JS bundle)
+        working-directory: apps/mobile
+        run: |
+          cat > .env <<EOF
+          EXPO_PUBLIC_SUPABASE_URL=${{ secrets.EXPO_PUBLIC_SUPABASE_URL }}
+          EXPO_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.EXPO_PUBLIC_SUPABASE_ANON_KEY }}
+          EXPO_PUBLIC_API_URL=${{ vars.EXPO_PUBLIC_API_URL }}
+          EXPO_PUBLIC_WEB_URL=${{ vars.EXPO_PUBLIC_WEB_URL }}
+          EOF
+
+      - name: Generate the iOS project
+        working-directory: apps/mobile
+        run: CI=1 npx expo prebuild -p ios --no-install
+
+      - name: Install pods
+        working-directory: apps/mobile/ios
+        run: pod install
+
+      - name: Build (Release, no signing)
+        working-directory: apps/mobile/ios
+        run: |
+          xcodebuild -workspace SmartWaste.xcworkspace -scheme SmartWaste -configuration Release \
+            -sdk iphoneos -destination 'generic/platform=iOS' -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" | tail -n 200
+          test -d build/Build/Products/Release-iphoneos/SmartWaste.app
+
+      - name: Package .ipa
+        working-directory: apps/mobile/ios
+        run: |
+          mkdir Payload
+          cp -R build/Build/Products/Release-iphoneos/SmartWaste.app Payload/
+          zip -qry SmartWaste.ipa Payload
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SmartWaste-ios
+          path: apps/mobile/ios/SmartWaste.ipa
+          retention-days: 30

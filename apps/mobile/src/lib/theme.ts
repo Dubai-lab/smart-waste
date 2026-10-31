@@ -1,4 +1,4 @@
-import { useColorScheme } from 'react-native';
+import { Platform, useColorScheme } from 'react-native';
 
 const light = {
   primary: '#0D9488', primaryStrong: '#0F766E', primarySoft: '#CCFBF1', onPrimary: '#FFFFFF',
@@ -18,12 +18,14 @@ export function useColors(): Colors {
   return useColorScheme() === 'dark' ? dark : light;
 }
 
+// Fonts are embedded natively (expo-font plugin): Android registers them by family name, iOS by PostScript name.
+const ios = Platform.OS === 'ios';
 export const font = {
-  regular: 'FiraSans_400Regular',
-  medium: 'FiraSans_500Medium',
-  semibold: 'FiraSans_600SemiBold',
-  bold: 'FiraSans_700Bold',
-  mono: 'FiraCode_500Medium',
+  regular: ios ? 'FiraSans-Regular' : 'FiraSans_400Regular',
+  medium: ios ? 'FiraSans-Medium' : 'FiraSans_500Medium',
+  semibold: ios ? 'FiraSans-SemiBold' : 'FiraSans_600SemiBold',
+  bold: ios ? 'FiraSans-Bold' : 'FiraSans_700Bold',
+  mono: ios ? 'FiraCode-Medium' : 'FiraCode_500Medium',
 };
 export const space = { xs: 4, sm: 8, md: 16, lg: 24, xl: 32 };
 export const radius = { sm: 8, md: 12, lg: 16 };

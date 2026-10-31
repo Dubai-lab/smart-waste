@@ -9,7 +9,7 @@ import { useT } from '../../lib/i18n';
 import { useRealtimeInvalidate } from '../../lib/useRealtime';
 import { dateTime, day, money } from '../../lib/format';
 import { Badge, Button, Card, EmptyState, Field, QueryState, Row, Screen, Text } from '../../components/ui';
-import { useColors } from '../../lib/theme';
+import { font, useColors } from '../../lib/theme';
 
 export default function Pay() {
   const c = useColors();
@@ -60,7 +60,7 @@ export default function Pay() {
             {unpaid.map((i: any, k: number) => (
               <Card key={i.id} index={k}>
                 <Text variant="caption" muted>Bill {i.period} · due {day(i.due_date)}</Text>
-                <Text variant="h1" style={{ fontFamily: 'FiraCode_500Medium' }}>{money(i.amount_due)}</Text>
+                <Text variant="h1" style={{ fontFamily: font.mono }}>{money(i.amount_due)}</Text>
                 {i.discount > 0 && <Text variant="small" color={c.success}>Green points saved you {money(i.discount)} ({i.points_used} {i.points_used === 1 ? 'point' : 'points'})</Text>}
                 <Field label="MoMo number" value={phone} onChangeText={(v) => { setPhone(v); setPhoneErr(undefined); }} keyboardType="phone-pad" error={phoneErr} autoComplete="tel" />
                 <Button title={t('payNow')} icon={Smartphone} loading={start.isPending || !!paymentId}
@@ -82,7 +82,7 @@ export default function Pay() {
                 <Card key={i.id}>
                   <Row style={{ justifyContent: 'space-between' }}>
                     <Row><Receipt size={20} color={c.mutedFg} /><View><Text variant="label">{i.period}</Text><Text variant="small" muted>{p ? `${p.receipt_no ?? ''} · ${dateTime(p.created_at)}` : i.status}</Text></View></Row>
-                    <Text variant="label" style={{ fontFamily: 'FiraCode_500Medium' }}>{money(i.amount_due)}</Text>
+                    <Text variant="label" style={{ fontFamily: font.mono }}>{money(i.amount_due)}</Text>
                   </Row>
                 </Card>
               );

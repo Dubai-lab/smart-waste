@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { Trophy } from 'lucide-react-native';
 import { supabase, q } from '../lib/supabase';
 import { Card, EmptyState, QueryState, Row, Screen, Text } from '../components/ui';
-import { useColors } from '../lib/theme';
+import { font, useColors } from '../lib/theme';
 
 export default function Leaderboard() {
   const c = useColors();
@@ -16,13 +16,13 @@ export default function Leaderboard() {
           <Card key={v.village_id} index={i}>
             <Row>
               <View style={{ width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center', backgroundColor: i === 0 ? c.warningSoft : c.muted }}>
-                <Text variant="label" style={{ fontFamily: 'FiraCode_500Medium' }} color={i === 0 ? c.warning : c.fg}>{i + 1}</Text>
+                <Text variant="label" style={{ fontFamily: font.mono }} color={i === 0 ? c.warning : c.fg}>{i + 1}</Text>
               </View>
               <View style={{ flex: 1 }}>
                 <Text variant="label">{v.village}</Text>
                 <Text variant="small" muted>{v.cell} · {v.sector} · {v.households} {v.households === 1 ? 'household' : 'households'}{v.sorted_rate != null ? ` · ${Math.round(v.sorted_rate * 100)}% sorted` : ''}</Text>
               </View>
-              <Text variant="title" style={{ fontFamily: 'FiraCode_500Medium' }}>{v.points_per_household}</Text>
+              <Text variant="title" style={{ fontFamily: font.mono }}>{v.points_per_household}</Text>
             </Row>
           </Card>
         ))}

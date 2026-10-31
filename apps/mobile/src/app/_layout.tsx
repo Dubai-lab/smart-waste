@@ -8,7 +8,7 @@ import { focusManager, onlineManager, QueryClient, QueryClientProvider } from '@
 import { addNetworkStateListener } from 'expo-network';
 import { AuthProvider, useAuth } from '../lib/auth';
 import { registerPush } from '../lib/push';
-import { useColors } from '../lib/theme';
+import { font, useColors } from '../lib/theme';
 import { clearRouteCache } from '../lib/outbox';
 import { stopTracking } from '../lib/tracking';
 import { Button, Text } from '../components/ui';
@@ -71,7 +71,7 @@ export default function RootLayout() {
         <StatusBar style="auto" />
         <Stack screenOptions={{
           headerShown: false, contentStyle: { backgroundColor: c.bg },
-          headerStyle: { backgroundColor: c.card }, headerTintColor: c.fg, headerTitleStyle: { fontFamily: 'FiraSans_600SemiBold' },
+          headerStyle: { backgroundColor: c.card }, headerTintColor: c.fg, headerTitleStyle: { fontFamily: font.semibold },
         }}>
           <Stack.Screen name="complaint" options={{ headerShown: true, title: 'Report a problem' }} />
           <Stack.Screen name="recyclables" options={{ headerShown: true, title: 'Recyclables' }} />
