@@ -65,7 +65,7 @@ The live tests create temporary users and data in Supabase and delete them after
 
 1. **GitHub**: push this repository (private is fine).
 2. **API on Render**: New → Blueprint → select the repo (`render.yaml`). Fill the env vars. Free services sleep after 15 minutes; the keep-alive workflow and `pg_cron` ping it.
-3. **Web on Vercel**: import the repo (root directory = repository root; `vercel.json` sets build and headers). Set `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `VITE_API_URL` (the Render URL).
+3. **Web on Vercel**: import the repo and set **Root Directory = `apps/web`** (`apps/web/vercel.json` sets the monorepo build, SPA rewrites and security headers). Set `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `VITE_API_URL` (the Render URL).
 4. **Tell the database where the API is** (enables the 05:00 daily planning job):
    ```bash
    node scripts/db-apply.mjs --sql "insert into ops.secrets(key,value) values ('api_base_url','https://<your-api>.onrender.com') on conflict (key) do update set value=excluded.value"

@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "build:host": "npm run build && node -e \"const p=require('path'),fs=require('fs');const t=p.resolve(process.env.INIT_CWD||'.','dist');if(t!==p.resolve('dist')){fs.rmSync(t,{recursive:true,force:true});fs.cpSync('dist',t,{recursive:true})}console.log('site ->',t)\"",
     "preview": "vite preview",
     "typecheck": "tsc -b --noEmit"
   },
