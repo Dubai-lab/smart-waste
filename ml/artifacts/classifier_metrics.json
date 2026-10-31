@@ -1,0 +1,145 @@
+{
+  "classes": [
+    "organic",
+    "plastic",
+    "paper",
+    "metal",
+    "glass",
+    "other"
+  ],
+  "dataset": {
+    "organic": {
+      "available": 985,
+      "used": 985
+    },
+    "plastic": {
+      "available": 1347,
+      "used": 1347
+    },
+    "paper": {
+      "available": 2938,
+      "used": 2000
+    },
+    "metal": {
+      "available": 1179,
+      "used": 1179
+    },
+    "glass": {
+      "available": 2517,
+      "used": 2000
+    },
+    "other": {
+      "available": 9081,
+      "used": 2000
+    }
+  },
+  "split": {
+    "train": 7113,
+    "val": 971,
+    "test": 1427
+  },
+  "test_accuracy": 0.900490539593553,
+  "macro_f1": 0.8998550073326216,
+  "per_class": {
+    "organic": {
+      "precision": 0.9545,
+      "recall": 0.9932,
+      "f1-score": 0.9735,
+      "support": 148.0
+    },
+    "plastic": {
+      "precision": 0.8889,
+      "recall": 0.7921,
+      "f1-score": 0.8377,
+      "support": 202.0
+    },
+    "paper": {
+      "precision": 0.9777,
+      "recall": 0.8767,
+      "f1-score": 0.9244,
+      "support": 300.0
+    },
+    "metal": {
+      "precision": 0.7425,
+      "recall": 0.9774,
+      "f1-score": 0.8439,
+      "support": 177.0
+    },
+    "glass": {
+      "precision": 0.8993,
+      "recall": 0.8633,
+      "f1-score": 0.881,
+      "support": 300.0
+    },
+    "other": {
+      "precision": 0.934,
+      "recall": 0.9433,
+      "f1-score": 0.9386,
+      "support": 300.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      147,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      160,
+      2,
+      17,
+      20,
+      3
+    ],
+    [
+      1,
+      4,
+      263,
+      15,
+      3,
+      14
+    ],
+    [
+      0,
+      0,
+      1,
+      173,
+      3,
+      0
+    ],
+    [
+      4,
+      14,
+      1,
+      19,
+      259,
+      3
+    ],
+    [
+      2,
+      2,
+      2,
+      8,
+      3,
+      283
+    ]
+  ],
+  "tflite_size_kb": 4374,
+  "tflite_keras_agreement": 0.995,
+  "tflite_cpu_ms_median_dev_machine": 9.624056503525935,
+  "input": {
+    "shape": [
+      1,
+      224,
+      224,
+      3
+    ],
+    "dtype": "float32",
+    "range": "0..255 RGB"
+  },
+  "train_minutes": 40.1
+}

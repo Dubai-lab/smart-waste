@@ -1,0 +1,30 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci --include=dev
+      - run: npm run build -w @sw/shared
+      - name: Typecheck
+        run: |
+          npm run typecheck -w @sw/api
+          npm run typecheck -w @sw/web
+          npm run typecheck -w @sw/mobile
+      - name: Unit tests (route solver, demand model evaluator)
+        run: npm test -w @sw/api
+        env:
+          SUPABASE_URL: https://example.supabase.co
+          SUPABASE_SERVICE_ROLE_KEY: ci-placeholder-not-a-real-key
+      - name: Build web
+        run: npm run build -w @sw/web
+        env:
+          VITE_SUPABASE_URL: https://example.supabase.co
+          VITE_SUPABASE_ANON_KEY: ci-placeholder

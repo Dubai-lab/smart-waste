@@ -1,0 +1,26 @@
+# secrets
+.env
+.env.*
+!.env.example
+
+# deps / builds
+node_modules/
+dist/
+build/
+.expo/
+*.tsbuildinfo
+.vercel/
+.turbo/
+
+# python / ml
+__pycache__/
+.venv/
+*.ipynb_checkpoints
+
+# os / editor
+.DS_Store
+*.log
+
+# kept local: Firebase config is given to EAS as a file secret (GOOGLE_SERVICES_JSON); student's proposal
+apps/mobile/google-services.json
+*.docx

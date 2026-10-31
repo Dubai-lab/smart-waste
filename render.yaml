@@ -1,0 +1,29 @@
+# Render Blueprint — free web service for the Node API (https://render.com/docs/blueprint-spec)
+services:
+  - type: web
+    name: smart-waste-api
+    runtime: node
+    plan: free
+    region: frankfurt
+    buildCommand: npm ci --include=dev && npm run build -w @sw/shared && npm run build -w @sw/api
+    startCommand: node apps/api/dist/index.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: CRON_SECRET
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false            # e.g. https://smart-waste.vercel.app
+      - key: PUBLIC_API_URL
+        sync: false            # e.g. https://smart-waste-api.onrender.com (MoMo callback)
+      - key: MOMO_SUBSCRIPTION_KEY
+        sync: false
+      - key: MOMO_API_USER
+        sync: false
+      - key: MOMO_API_KEY
+        sync: false

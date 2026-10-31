@@ -1,0 +1,68 @@
+{
+  "version": "demand-gradient-202610302147",
+  "chosen": "gradient_boosting",
+  "export_max_abs_diff": 4.440892098500626e-16,
+  "test_set": "validation split (no real test set yet)",
+  "rows": {
+    "real_total": 0,
+    "real_train": 0,
+    "real_test": 0,
+    "simulated_train": 8899
+  },
+  "comparison": {
+    "logistic_regression": {
+      "validation": {
+        "accuracy": 0.9135,
+        "precision": 0.8638,
+        "recall": 0.9016,
+        "f1": 0.8823,
+        "n": 1780,
+        "roc_auc": 0.9749
+      },
+      "test": {
+        "accuracy": 0.9135,
+        "precision": 0.8638,
+        "recall": 0.9016,
+        "f1": 0.8823,
+        "n": 1780,
+        "roc_auc": 0.9749
+      }
+    },
+    "random_forest": {
+      "validation": {
+        "accuracy": 0.9157,
+        "precision": 0.8614,
+        "recall": 0.9125,
+        "f1": 0.8862,
+        "n": 1780,
+        "roc_auc": 0.9798
+      },
+      "test": {
+        "accuracy": 0.9157,
+        "precision": 0.8614,
+        "recall": 0.9125,
+        "f1": 0.8862,
+        "n": 1780,
+        "roc_auc": 0.9798
+      }
+    },
+    "gradient_boosting": {
+      "validation": {
+        "accuracy": 0.9208,
+        "precision": 0.9018,
+        "recall": 0.875,
+        "f1": 0.8882,
+        "n": 1780,
+        "roc_auc": 0.9808
+      },
+      "test": {
+        "accuracy": 0.9208,
+        "precision": 0.9018,
+        "recall": 0.875,
+        "f1": 0.8882,
+        "n": 1780,
+        "roc_auc": 0.9808
+      }
+    }
+  }
+}

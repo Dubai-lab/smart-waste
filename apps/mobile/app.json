@@ -1,0 +1,146 @@
+{
+  "expo": {
+    "name": "Smart Waste",
+    "slug": "smart-waste",
+    "scheme": "smartwaste",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "rw.fyp.smartwaste"
+    },
+    "android": {
+      "package": "rw.fyp.smartwaste",
+      "googleServicesFile": "./google-services.json",
+      "adaptiveIcon": {
+        "backgroundColor": "#0F766E",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "permissions": [
+        "CAMERA",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "POST_NOTIFICATIONS"
+      ],
+      "blockedPermissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "predictiveBackGestureEnabled": false
+    },
+    "plugins": [
+      "expo-router",
+      "expo-sqlite",
+      [
+        "expo-font",
+        {
+          "ios": {
+            "fonts": [
+              "../../node_modules/@expo-google-fonts/fira-sans/400Regular/FiraSans_400Regular.ttf",
+              "../../node_modules/@expo-google-fonts/fira-sans/500Medium/FiraSans_500Medium.ttf",
+              "../../node_modules/@expo-google-fonts/fira-sans/600SemiBold/FiraSans_600SemiBold.ttf",
+              "../../node_modules/@expo-google-fonts/fira-sans/700Bold/FiraSans_700Bold.ttf",
+              "../../node_modules/@expo-google-fonts/fira-code/500Medium/FiraCode_500Medium.ttf"
+            ]
+          },
+          "android": {
+            "fonts": [
+              {
+                "fontFamily": "FiraSans_400Regular",
+                "fontDefinitions": [
+                  {
+                    "path": "../../node_modules/@expo-google-fonts/fira-sans/400Regular/FiraSans_400Regular.ttf",
+                    "weight": 400
+                  }
+                ]
+              },
+              {
+                "fontFamily": "FiraSans_500Medium",
+                "fontDefinitions": [
+                  {
+                    "path": "../../node_modules/@expo-google-fonts/fira-sans/500Medium/FiraSans_500Medium.ttf",
+                    "weight": 400
+                  }
+                ]
+              },
+              {
+                "fontFamily": "FiraSans_600SemiBold",
+                "fontDefinitions": [
+                  {
+                    "path": "../../node_modules/@expo-google-fonts/fira-sans/600SemiBold/FiraSans_600SemiBold.ttf",
+                    "weight": 400
+                  }
+                ]
+              },
+              {
+                "fontFamily": "FiraSans_700Bold",
+                "fontDefinitions": [
+                  {
+                    "path": "../../node_modules/@expo-google-fonts/fira-sans/700Bold/FiraSans_700Bold.ttf",
+                    "weight": 400
+                  }
+                ]
+              },
+              {
+                "fontFamily": "FiraCode_500Medium",
+                "fontDefinitions": [
+                  {
+                    "path": "../../node_modules/@expo-google-fonts/fira-code/500Medium/FiraCode_500Medium.ttf",
+                    "weight": 400
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#0F766E",
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 160
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Smart Waste uses the camera to scan household QR codes and to identify waste for sorting.",
+          "recordAudioAndroid": false
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Smart Waste uses your location to place your house on the map and to verify pickups."
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "color": "#0D9488"
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Attach photos to complaints and recyclable listings.",
+          "microphonePermission": false
+        }
+      ],
+      "react-native-fast-tflite",
+      "expo-dev-client"
+    ],
+    "experiments": {
+      "typedRoutes": false
+    },
+    "extra": {
+      "eas": {
+        "projectId": ""
+      }
+    }
+  }
+}

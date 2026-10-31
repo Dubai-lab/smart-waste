@@ -1,0 +1,51 @@
+@import 'tailwindcss';
+@import 'leaflet/dist/leaflet.css';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Fira Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Fira Code', ui-monospace, monospace;
+
+  --color-primary: #0d9488;
+  --color-primary-strong: #0f766e;
+  --color-primary-soft: #ccfbf1;
+  --color-accent: #d97706;
+  --color-bg: #f6faf9;
+  --color-card: #ffffff;
+  --color-fg: #0f2e2b;
+  --color-muted: #eef3f2;
+  --color-muted-fg: #475569;
+  --color-border: #d5e3e0;
+  --color-success: #15803d;
+  --color-warning: #b45309;
+  --color-danger: #dc2626;
+  --color-info: #0369a1;
+
+  --ease-out-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dark {
+  --color-bg: #0b1514;
+  --color-card: #111f1d;
+  --color-fg: #e6f2f0;
+  --color-muted: #18302c;
+  --color-muted-fg: #9fb3af;
+  --color-border: #1f3532;
+  --color-primary: #2dd4bf;
+  --color-primary-strong: #5eead4;
+  --color-primary-soft: #134e4a;
+}
+
+html { -webkit-text-size-adjust: 100%; }
+body { @apply bg-bg text-fg font-sans antialiased; font-size: 14px; line-height: 1.5; }
+:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.leaflet-container { font-family: var(--font-sans); background: var(--color-muted); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+@media print {
+  .no-print { display: none !important; }
+  body { background: white; }
+}
