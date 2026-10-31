@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Ping Supabase
-        run: curl -fsS "${{ secrets.SUPABASE_URL }}/rest/v1/settings?select=key&limit=1" -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" -o /dev/null || echo "supabase ping failed"
+        run: |
+          curl -fsS "${{ secrets.SUPABASE_URL }}/rest/v1/settings?select=key&limit=1" -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" -o /dev/null || echo "supabase ping failed"
       - name: Ping API
-        run: curl -fsS "${{ secrets.API_URL }}/health" || echo "api ping failed"
+        run: |
+          curl -fsS "${{ secrets.API_URL }}/health" || echo "api ping failed"
