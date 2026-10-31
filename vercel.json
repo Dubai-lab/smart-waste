@@ -1,8 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "installCommand": "npm ci --include=dev",
-  "buildCommand": "npm run build -w @sw/shared && npm run build -w @sw/web",
-  "outputDirectory": "apps/web/dist",
+  "buildCommand": "npm run build -w @sw/shared && npm run build -w @sw/web && rm -rf dist && cp -r apps/web/dist dist",
+  "outputDirectory": "dist",
   "rewrites": [{ "source": "/((?!assets/).*)", "destination": "/index.html" }],
   "headers": [
     {
