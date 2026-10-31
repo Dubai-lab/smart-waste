@@ -71,7 +71,8 @@ The live tests create temporary users and data in Supabase and delete them after
    node scripts/db-apply.mjs --sql "insert into ops.secrets(key,value) values ('api_base_url','https://<your-api>.onrender.com') on conflict (key) do update set value=excluded.value"
    ```
 5. **Supabase Auth**: in *Authentication → URL configuration* set the site URL to the Vercel URL and add `https://<your-site>.vercel.app/**` to redirect URLs (currently `http://localhost:5173`). Set `EXPO_PUBLIC_WEB_URL` in the mobile app to the same URL before building the APK. Email is sent through Gmail SMTP (configured in *Authentication → SMTP*).
-6. **GitHub secrets** for `keepalive.yml`: `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `API_URL`.
+6. **GitHub** (Settings → Secrets and variables → Actions): secrets `EXPO_PUBLIC_SUPABASE_URL`, `EXPO_PUBLIC_SUPABASE_ANON_KEY`; variables `EXPO_PUBLIC_API_URL` (Render URL), `EXPO_PUBLIC_WEB_URL` (Vercel URL). Used by the iOS build and the keep-alive job.
+7. **iPhone test build** (free Apple ID, Sideloadly, re-install every 7 days; no push): Actions → *iOS build (unsigned)* → Run workflow → download `SmartWaste-ios`.
 
 ### Mobile app (Android APK, no Play Store fee)
 

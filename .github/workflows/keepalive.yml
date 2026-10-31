@@ -1,5 +1,5 @@
 # Free tiers sleep when idle: Supabase pauses after ~7 days without traffic, Render after 15 min.
-# This pings both so the pilot keeps working. Set repository secrets SUPABASE_URL, SUPABASE_ANON_KEY, API_URL.
+# This pings both so the pilot keeps working. Reuses the app build settings (EXPO_PUBLIC_* secrets/variables).
 name: Keep alive
 on:
   schedule:
@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Ping Supabase
         run: |
-          curl -fsS "${{ secrets.SUPABASE_URL }}/rest/v1/settings?select=key&limit=1" -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" -o /dev/null || echo "supabase ping failed"
+          curl -fsS "${{ secrets.EXPO_PUBLIC_SUPABASE_URL }}/rest/v1/settings?select=key&limit=1" -H "apikey: ${{ secrets.EXPO_PUBLIC_SUPABASE_ANON_KEY }}" -o /dev/null || echo "supabase ping failed"
       - name: Ping API
         run: |
-          curl -fsS "${{ secrets.API_URL }}/health" || echo "api ping failed"
+          curl -fsS "${{ vars.EXPO_PUBLIC_API_URL }}/health" || echo "api ping failed"
