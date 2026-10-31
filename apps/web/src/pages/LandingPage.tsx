@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { AnimatePresence, motion, useReducedMotion, type Variants } from 'motion/react';
+import { AnimatePresence, motion, useMotionTemplate, useMotionValue, useReducedMotion, useSpring, useTransform, type Variants } from 'motion/react';
 import {
   ArrowRight, BarChart3, Bell, Building2, Camera, CheckCircle2, ChevronDown, CloudOff, Coins, Download, Leaf, LogIn,
   MapPin, Menu, MessageSquareWarning, Phone, QrCode, Recycle, Route, ShieldCheck, Smartphone, Sparkles, Truck, Users, X,
@@ -8,7 +8,10 @@ import {
 } from 'lucide-react';
 import { CountUp, EASE } from '../components/ui';
 
-const APK_URL = import.meta.env.VITE_APK_URL as string | undefined;
+// "latest" always resolves to the newest GitHub release, so these links never change when the apps are rebuilt.
+const RELEASE = 'https://github.com/Dubai-lab/smart-waste/releases/latest/download';
+const APK_URL = (import.meta.env.VITE_APK_URL as string | undefined) || `${RELEASE}/SmartWaste.apk`;
+const IPA_URL = (import.meta.env.VITE_IPA_URL as string | undefined) || `${RELEASE}/SmartWaste.ipa`;
 
 const stagger: Variants = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } };
 const item: Variants = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } } };
@@ -70,6 +73,7 @@ const NAV = [
   { href: '#how', label: 'How it works' },
   { href: '#features', label: 'Features' },
   { href: '#who', label: 'Who it is for' },
+  { href: '#download', label: 'Get the app' },
   { href: '#faq', label: 'FAQ' },
 ];
 
@@ -254,7 +258,7 @@ function Hero() {
             and records every pickup with a signed QR code, GPS and time. Households earn green points for sorting, and the points lower their monthly fee.
           </motion.p>
           <motion.div {...up(0.2)} className="mt-8 flex flex-wrap gap-3">
-            <CtaLink href="#download" icon={Smartphone}>Get the Android app</CtaLink>
+            <CtaLink href="#download" icon={Smartphone}>Get the app</CtaLink>
             <CtaLink to="/login" variant="secondary" icon={ArrowRight}>Open the dashboard</CtaLink>
           </motion.div>
           <motion.ul {...up(0.3)} className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-fg">
@@ -408,37 +412,103 @@ function WhoItIsFor() {
 }
 
 // ───────── Download ─────────
+/** A phone drawn in CSS 3D (stacked layers give it thickness) that tilts toward the pointer and floats gently. */
+function Phone3D() {
+  const reduce = useReducedMotion();
+  const px = useMotionValue(0);
+  const py = useMotionValue(0);
+  const rotateY = useSpring(useTransform(px, [-0.5, 0.5], [-26, 6]), { stiffness: 120, damping: 18 });
+  const rotateX = useSpring(useTransform(py, [-0.5, 0.5], [14, -4]), { stiffness: 120, damping: 18 });
+  const glareX = useTransform(px, [-0.5, 0.5], ['20%', '80%']);
+  const glare = useMotionTemplate`radial-gradient(circle at ${glareX} 20%, rgba(255,255,255,0.22), transparent 55%)`;
+  const onMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (reduce) return;
+    const r = e.currentTarget.getBoundingClientRect();
+    px.set((e.clientX - r.left) / r.width - 0.5);
+    py.set((e.clientY - r.top) / r.height - 0.5);
+  };
+  const reset = () => { px.set(-0.15); py.set(-0.1); };
+  useEffect(reset, []);
+  const depth = 16;
+  return (
+    <div className="relative mx-auto flex h-[520px] w-full max-w-[340px] items-center justify-center [perspective:1200px]" onPointerMove={onMove} onPointerLeave={reset}>
+      <motion.div
+        aria-hidden
+        className="absolute bottom-2 h-8 w-52 rounded-[50%] bg-black/45 blur-xl"
+        animate={reduce ? undefined : { scale: [1, 0.9, 1], opacity: [0.7, 0.5, 0.7] }}
+        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <motion.div
+        animate={reduce ? undefined : { y: [0, -12, 0] }}
+        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+        className="[transform-style:preserve-3d]"
+      >
+        <motion.div style={reduce ? { rotateY: -14, rotateX: 6 } : { rotateY, rotateX }} className="relative h-[460px] w-[222px] [transform-style:preserve-3d]">
+          {/* body thickness: layers stacked behind the front face */}
+          {Array.from({ length: depth }, (_, i) => (
+            <div key={i} aria-hidden className="absolute inset-0 rounded-[38px] bg-[#1f2b29]" style={{ transform: `translateZ(${-(i + 1)}px)`, filter: `brightness(${0.9 - i * 0.02})` }} />
+          ))}
+          <div aria-hidden className="absolute inset-0 rounded-[38px] bg-gradient-to-br from-primary-strong to-[#0b3d39]" style={{ transform: `translateZ(${-depth - 1}px) rotateY(180deg)` }} />
+          {/* front face */}
+          <div className="absolute inset-0 rounded-[38px] bg-[#0b1514] p-[9px] shadow-[inset_0_0_0_1.5px_rgba(255,255,255,0.14)]">
+            <div className="relative h-full w-full overflow-hidden rounded-[30px] bg-bg">
+              <img src="/app-home.webp" alt="Smart Waste app home screen: next collection, report a full bin, bill and green points" className="h-full w-full object-cover object-top" width={600} height={1333} loading="lazy" />
+              <div aria-hidden className="absolute left-1/2 top-2 h-[18px] w-[70px] -translate-x-1/2 rounded-full bg-black" />
+            </div>
+          </div>
+          <motion.div aria-hidden className="pointer-events-none absolute inset-0 rounded-[38px]" style={{ background: glare }} />
+          {/* side buttons */}
+          <div aria-hidden className="absolute -right-[3px] top-28 h-14 w-[3px] rounded-r bg-[#2a3836]" />
+          <div aria-hidden className="absolute -left-[3px] top-24 h-9 w-[3px] rounded-l bg-[#2a3836]" />
+          <div aria-hidden className="absolute -left-[3px] top-36 h-9 w-[3px] rounded-l bg-[#2a3836]" />
+        </motion.div>
+      </motion.div>
+    </div>
+  );
+}
+
 function DownloadCta() {
   return (
     <section id="download" className="scroll-mt-20 px-5 pb-20 sm:pb-28">
-      <Reveal className="relative mx-auto max-w-6xl overflow-hidden rounded-3xl bg-fg px-6 py-14 text-white sm:px-14 dark:bg-card">
+      <Reveal className="relative mx-auto max-w-6xl overflow-hidden rounded-3xl bg-fg px-6 py-12 text-white sm:px-14 dark:bg-card">
         <div aria-hidden className="pointer-events-none absolute -right-20 -top-20 size-80 rounded-full bg-primary/40 blur-3xl" />
-        <div className="relative grid items-center gap-10 lg:grid-cols-[1.4fr_1fr]">
+        <div aria-hidden className="pointer-events-none absolute -bottom-24 left-1/3 size-72 rounded-full bg-accent/20 blur-3xl" />
+        <div className="relative grid items-center gap-8 lg:grid-cols-[1.25fr_1fr]">
           <div>
-            <h2 className="text-3xl font-semibold leading-tight text-balance sm:text-4xl">Join the pilot</h2>
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary-soft">Get the app</p>
+            <h2 className="mt-3 text-3xl font-semibold leading-tight text-balance sm:text-4xl">Join the pilot from your phone</h2>
             <p className="mt-4 max-w-xl text-white/75">
-              Residents and crews use the Android app. Managers, sector officers and recyclers sign in on the web.
+              Households and crews use the mobile app. Managers, sector officers and recyclers sign in on the web.
               No smartphone? The USSD menu works on any phone.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              {APK_URL
-                ? <CtaLink href={APK_URL} variant="light" icon={Download}>Download for Android</CtaLink>
-                : <span className="inline-flex min-h-12 items-center gap-2 rounded-lg border border-white/25 px-5 text-[15px] text-white/80"><Smartphone className="size-4" aria-hidden /> Android app: ask the pilot coordinator for the link</span>}
+              <CtaLink href={APK_URL} variant="light" icon={Download}>Download for Android</CtaLink>
               <CtaLink to="/login" variant="primary" icon={LogIn}>Sign in to the dashboard</CtaLink>
             </div>
+            <ol className="mt-8 grid gap-3 text-sm sm:grid-cols-3">
+              {[
+                { n: '1', t: 'Download', d: 'Tap the button on your Android phone.' },
+                { n: '2', t: 'Allow install', d: 'Your browser asks once to allow apps from it. Allow it.' },
+                { n: '3', t: 'Open and sign up', d: 'Create an account and register your house.' },
+              ].map((x) => (
+                <li key={x.n} className="rounded-xl border border-white/15 bg-white/5 p-4">
+                  <span className="font-mono text-primary-soft">{x.n}</span>
+                  <p className="mt-1 font-medium">{x.t}</p>
+                  <p className="text-white/65">{x.d}</p>
+                </li>
+              ))}
+            </ol>
+            <div className="mt-6 flex flex-col gap-2 rounded-xl border border-white/15 p-4 text-sm text-white/75 sm:flex-row sm:items-center sm:justify-between">
+              <p className="max-w-md">
+                <span className="font-medium text-white">iPhone (test build).</span> Installed with a free Apple ID and a sideloading tool;
+                re-install every 7 days. Push alerts are Android only.
+              </p>
+              <a href={IPA_URL} className="inline-flex min-h-11 shrink-0 cursor-pointer items-center gap-2 rounded-lg border border-white/25 px-4 font-medium text-white transition-colors hover:bg-white/10">
+                <Smartphone className="size-4" aria-hidden /> Download .ipa
+              </a>
+            </div>
           </div>
-          <ul className="grid gap-3 text-sm">
-            {[
-              { icon: Smartphone, t: 'Android app', d: 'Households and crews' },
-              { icon: BarChart3, t: 'Web dashboard', d: 'Managers, officers, recyclers' },
-              { icon: Phone, t: 'USSD menu', d: 'Any phone, no internet' },
-            ].map((x) => (
-              <li key={x.t} className="flex items-center gap-3 rounded-xl border border-white/15 bg-white/5 p-4">
-                <x.icon className="size-5 text-primary-soft" aria-hidden />
-                <div><p className="font-medium">{x.t}</p><p className="text-white/65">{x.d}</p></div>
-              </li>
-            ))}
-          </ul>
+          <Phone3D />
         </div>
       </Reveal>
     </section>
