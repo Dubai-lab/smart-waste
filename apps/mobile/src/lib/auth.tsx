@@ -23,11 +23,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!uid) { setProfile(null); setHousehold(null); return; }
     const { data: p, error } = await supabase.from('profiles').select('*').eq('id', uid).single();
     if (error) return; // keep previous state on transient network errors
-    setProfile(p as Profile);
+    let h: AuthState['household'] = null;
     if (p.role === 'household') {
-      const { data: h } = await supabase.from('households_geo').select('id, label, zone_id, lat, lng').eq('owner_id', uid).eq('active', true).limit(1).maybeSingle();
-      setHousehold(h ?? null);
+      const { data } = await supabase.from('households_geo').select('id, label, zone_id, lat, lng').eq('owner_id', uid).eq('active', true).limit(1).maybeSingle();
+      h = data ?? null;
     }
+    // Set both together: index.tsx routes as soon as a profile exists, so a household arriving later
+    // would send an existing household to "Register your household".
+    setHousehold(h);
+    setProfile(p as Profile);
   }
 
   useEffect(() => {
