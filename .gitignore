@@ -24,3 +24,6 @@ __pycache__/
 # kept local: Firebase config is given to EAS as a file secret (GOOGLE_SERVICES_JSON); student's proposal
 apps/mobile/google-services.json
 *.docx
+
+# Android signing (kept in ~/secrets; read locally by eas-cli)
+apps/mobile/credentials.json

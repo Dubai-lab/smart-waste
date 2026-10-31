@@ -1,0 +1,31 @@
+# EAS uploads the repo using this file instead of .gitignore.
+# Same as .gitignore, except apps/mobile/google-services.json IS uploaded (it is kept out of the public repo).
+.env
+.env.*
+!.env.example
+node_modules/
+dist/
+build/
+.expo/
+*.tsbuildinfo
+.vercel/
+.turbo/
+__pycache__/
+.venv/
+*.ipynb_checkpoints
+.DS_Store
+*.log
+*.docx
+ml/data/
+ml/artifacts/*.keras
+apps/mobile/android/
+apps/mobile/ios/
+apps/mobile/web-build/
+apps/mobile/expo-env.d.ts
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.pem
+apps/mobile/credentials.json

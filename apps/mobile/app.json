@@ -139,8 +139,14 @@
     },
     "extra": {
       "eas": {
-        "projectId": ""
+        "projectId": "f4634bb3-a1c4-4808-867d-3ee7dd7397e2"
+      },
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
       }
-    }
+    },
+    "owner": "emmageoreges-organization"
   }
 }

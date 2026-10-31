@@ -1,8 +1,40 @@
 {
-  "cli": { "version": ">= 16.0.0", "appVersionSource": "local" },
+  "cli": {
+    "version": ">= 16.0.0",
+    "appVersionSource": "local"
+  },
   "build": {
-    "development": { "developmentClient": true, "distribution": "internal", "android": { "buildType": "apk" } },
-    "preview": { "distribution": "internal", "android": { "buildType": "apk" } },
-    "production": { "android": { "buildType": "apk" } }
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk",
+        "credentialsSource": "local"
+      },
+      "env": {
+        "EXPO_PUBLIC_SUPABASE_URL": "https://bgkzxiirauobmsehjxaw.supabase.co",
+        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJna3p4aWlyYXVvYm1zZWhqeGF3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMzNzg2ODYsImV4cCI6MjEwODk1NDY4Nn0.vCVb2LrAXWHPQ5kedngn2EiprL6HQ3WzVyoEfXXbfHM",
+        "EXPO_PUBLIC_API_URL": "https://smart-waste-api-ycn6.onrender.com",
+        "EXPO_PUBLIC_WEB_URL": "https://smart-waste-pi.vercel.app"
+      }
+    },
+    "production": {
+      "android": {
+        "buildType": "apk",
+        "credentialsSource": "local"
+      },
+      "env": {
+        "EXPO_PUBLIC_SUPABASE_URL": "https://bgkzxiirauobmsehjxaw.supabase.co",
+        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJna3p4aWlyYXVvYm1zZWhqeGF3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMzNzg2ODYsImV4cCI6MjEwODk1NDY4Nn0.vCVb2LrAXWHPQ5kedngn2EiprL6HQ3WzVyoEfXXbfHM",
+        "EXPO_PUBLIC_API_URL": "https://smart-waste-api-ycn6.onrender.com",
+        "EXPO_PUBLIC_WEB_URL": "https://smart-waste-pi.vercel.app"
+      }
+    }
   }
 }
