@@ -4,6 +4,28 @@ A demand-driven household waste collection platform for Kigali that needs no har
 
 Final year project (BSc ISM, 2026/2027). Everything runs on free tiers. Mobile Money and USSD use **sandbox (test) mode**; no real money moves.
 
+## Try it
+
+- **Website (admin dashboard):** https://smart-waste-pi.vercel.app
+- **Mobile app:** on the website, tap **Get the app**. Android: install the APK. iPhone: test build (.ipa), installed with a sideloading tool and an Apple ID.
+
+### Demo accounts
+
+All three use the password **`Demo-e4bdd197`**.
+
+| Role | Email | Where to sign in | What to try |
+|---|---|---|---|
+| Admin | `admin@smartwaste.demo` | Website | Households (map search, QR stickers), Routes & planning, Zones & fleet, Billing, Analytics, Authority view, Users & roles, Settings |
+| Household | `household@smartwaste.demo` | Mobile app | Home, report a full bin, sorting assistant (camera), My QR, invoices and **Pay** (MoMo sandbox), leaderboard, complaints |
+| Crew | `crew@smartwaste.demo` | Mobile app | Today's route, scan a household QR (needs GPS within 50 m of the house), offline sync |
+
+The demo setup is one zone (*Demo zone Kimironko*), one crew, one truck (*RAD 001 D*) and one house (*Demo house 1, KG 11 Ave*); there is no activity history yet.
+
+- **Crew route:** a route appears once the admin runs **Routes & planning → Predict & optimise**, or after the daily planning job.
+- **Testing a QR scan away from Kimironko:** as admin, edit *Demo house 1* and move its pin to where you are (search a place or use **My location**), then scan its QR as crew.
+- **Everything else** (new households registering, recyclers, billing for many houses, SMS to real numbers) needs **real user registrations**. Sign up from the mobile app (household) or the website (recycler). SMS is limited to verified numbers while the Infobip account is on its free trial.
+- **Before a real pilot**, change or delete the demo accounts, the admin one above all, because this password is public.
+
 ## What is in the box
 
 | Part | Folder | Stack |
