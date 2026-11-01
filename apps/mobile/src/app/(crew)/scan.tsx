@@ -33,6 +33,7 @@ export default function Scan() {
   const [saving, setSaving] = useState(false);
   const [result, setResult] = useState<{ ok: boolean | null; text: string } | null>(null);
   const locked = useRef(false);
+  const scanId = useRef(0);
 
   const hid = qr ? householdIdFromQr(qr) : null;
   const stop = route.data?.route?.stops.find((s) => s.household_id === hid) ?? null;
@@ -44,13 +45,28 @@ export default function Scan() {
     void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
     setQr(data); setResult(null); setFill(null); setSorted(null); setPhoto(null); setPos(null); setGpsErr(null);
     // GPS at the moment of the scan — proof the phone was at the house
+    const id = ++scanId.current;
+    const live = () => id === scanId.current;
+    const toPos = (p: Location.LocationObject): Pos => ({ lat: p.coords.latitude, lng: p.coords.longitude, acc: p.coords.accuracy });
     try {
-      const p = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.High });
-      setPos({ lat: p.coords.latitude, lng: p.coords.longitude, acc: p.coords.accuracy });
-    } catch {
+      const perm = await Location.requestForegroundPermissionsAsync();
+      if (!perm.granted) {
+        if (live()) setGpsErr('Location is off for Smart Waste. Turn it on in the phone settings, then scan again.');
+        return;
+      }
+      // A recent fix shows at once; a fresh one replaces it. iOS can wait indefinitely for a high-accuracy
+      // fix indoors, so the fresh read is capped and Confirm never waits on it forever.
       const last = await Location.getLastKnownPositionAsync({ maxAge: 120_000 });
-      if (last) setPos({ lat: last.coords.latitude, lng: last.coords.longitude, acc: last.coords.accuracy });
-      else setGpsErr('No GPS fix. Move to open sky; the scan will be rejected without a position.');
+      if (last && live()) setPos(toPos(last));
+      const fresh = await Promise.race([
+        Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.High }),
+        new Promise<null>((r) => setTimeout(() => r(null), 15_000)),
+      ]);
+      if (!live()) return;
+      if (fresh) setPos(toPos(fresh));
+      else if (!last) setGpsErr('No GPS fix. Move to open sky; the scan will be rejected without a position.');
+    } catch {
+      if (live()) setGpsErr('No GPS fix. Move to open sky; the scan will be rejected without a position.');
     }
   }
 
@@ -119,7 +135,7 @@ export default function Scan() {
             <Button style={{ flex: 1 }} variant="ghost" icon={RotateCcw} title="Cancel" onPress={() => { setQr(null); locked.current = false; }} />
           </Row>
           {photo && <Image source={{ uri: photo }} style={{ width: '100%', height: 160, borderRadius: 12 }} accessibilityLabel="Pickup photo" />}
-          <Button title="Confirm pickup" icon={CheckCircle2} disabled={!fill} loading={saving} onPress={save} />
+          <Button title={!pos && !gpsErr ? 'Waiting for GPS…' : 'Confirm pickup'} icon={CheckCircle2} disabled={!fill || (!pos && !gpsErr)} loading={saving} onPress={save} />
           {!fill && <Text variant="small" muted>Choose the fill level — it trains the demand prediction model.</Text>}
         </>
       )}
