@@ -5,7 +5,7 @@ import { Edit3, Plus, Trash2, UserPlus } from 'lucide-react';
 import { toast } from 'sonner';
 import { supabase, q } from '../lib/supabase';
 import { Badge, Button, Card, Field, Input, Modal, PageHeader, QueryView, Select, Table, Tabs } from '../components/ui';
-import { ClickToPick, depotIcon, MapView } from '../components/MapView';
+import { ClickToPick, depotIcon, MapView, PlaceSearch } from '../components/MapView';
 
 const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
@@ -97,6 +97,7 @@ function ZoneForm({ zone, onClose }: { zone: any; onClose: () => void }) {
         <div>
           <p className="mb-1 text-sm font-medium">Depot (truck start/end) <span className="text-danger">*</span></p>
           <MapView className="h-80" center={depot ?? undefined} zoom={depot ? 15 : 13} label="Click to set depot">
+            <PlaceSearch onPick={(a, b) => setDepot([a, b])} />
             <ClickToPick onPick={(a, b) => setDepot([a, b])} />
             {depot && <Marker position={depot} icon={depotIcon} />}
           </MapView>

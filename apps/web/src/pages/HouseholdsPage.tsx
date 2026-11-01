@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 import { supabase, q } from '../lib/supabase';
 import { money } from '../lib/format';
 import { Badge, Button, Card, Field, Input, Modal, PageHeader, QueryView, Select, Table } from '../components/ui';
-import { ClickToPick, FitBounds, MapView } from '../components/MapView';
+import { ClickToPick, FitBounds, MapView, PlaceSearch } from '../components/MapView';
 
 export default function HouseholdsPage() {
   const qc = useQueryClient();
@@ -166,10 +166,11 @@ function HouseholdForm({ household, zones, onClose, onSaved }: { household: any;
         <div>
           <p className="mb-1 flex items-center gap-1 text-sm font-medium"><MapPin className="size-4" aria-hidden /> Location <span className="text-danger">*</span></p>
           <MapView className="h-[340px]" label="Click to place the household" center={pos ?? undefined} zoom={pos ? 17 : 13}>
+            <PlaceSearch onPick={(lat, lng) => setPos([lat, lng])} />
             <ClickToPick onPick={(lat, lng) => setPos([lat, lng])} />
-            {pos && <Marker position={pos} />}
+            {pos && <Marker position={pos} draggable eventHandlers={{ dragend: (e) => { const p = e.target.getLatLng(); setPos([p.lat, p.lng]); } }} />}
           </MapView>
-          {errors.location ? <p role="alert" className="mt-1 text-xs text-danger">{errors.location}</p> : <p className="mt-1 text-xs text-muted-fg">Click on the house's gate. The QR scan is only accepted near this point.</p>}
+          {errors.location ? <p role="alert" className="mt-1 text-xs text-danger">{errors.location}</p> : <p className="mt-1 text-xs text-muted-fg">Search or use your location, then click or drag the pin onto the house's gate (Satellite helps). The QR scan is only accepted near this point (50 m by default).</p>}
         </div>
       </form>
     </Modal>
