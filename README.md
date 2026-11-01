@@ -11,13 +11,16 @@ Final year project (BSc ISM, 2026/2027). Everything runs on free tiers. Mobile M
 
 ### Demo accounts
 
-All three use the password **`Demo-e4bdd197`**.
+All six use the password **`Demo-e4bdd197`**.
 
 | Role | Email | Where to sign in | What to try |
 |---|---|---|---|
 | Admin | `admin@smartwaste.demo` | Website | Households (map search, QR stickers), Routes & planning, Zones & fleet, Billing, Analytics, Authority view, Users & roles, Settings |
 | Household | `household@smartwaste.demo` | Mobile app | Home, report a full bin, sorting assistant (camera), My QR, invoices and **Pay** (MoMo sandbox), leaderboard, complaints |
 | Crew | `crew@smartwaste.demo` | Mobile app | Today's route, scan a household QR (needs GPS within 50 m of the house), offline sync |
+| Manager | `manager@smartwaste.demo` | Website | Day-to-day operations: overview, routes & planning, households, proof of service, complaints, billing, zones & fleet, recyclables, analytics |
+| Officer | `officer@smartwaste.demo` | Website | Local authority for **Kimironko** sector: authority dashboard (service heatmap, illegal dumping, forecast), proof of service, complaints, analytics |
+| Recycler | `recycler@smartwaste.demo` | Website | Marketplace: browse and claim sorted recyclables that households list |
 
 The demo setup is one zone (*Demo zone Kimironko*), one crew, one truck (*RAD 001 D*) and one house (*Demo house 1, KG 11 Ave*); there is no activity history yet.
 
