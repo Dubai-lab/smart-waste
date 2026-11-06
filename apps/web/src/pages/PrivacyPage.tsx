@@ -1,7 +1,7 @@
 export function PrivacyText() {
   return (
     <div className="space-y-3 text-sm leading-relaxed [&_h3]:mt-4 [&_h3]:font-semibold">
-      <p>This system is a <strong>final year research project</strong> (BSc Information Systems Management, Faculty of Computing and Information Science, 2026/2027). Contact: Emmanuel George, <a className="underline" href="mailto:eg8217178@gmail.com">eg8217178@gmail.com</a>. It runs a pilot of a household waste collection service. It is not a registered company and no real money is collected — Mobile Money runs in test (sandbox) mode.</p>
+      <p>This system is a <strong>final year research project</strong> (BSc Software Engineering, 2026/2027). Contact: Danecious Smallwood, <a className="underline" href="mailto:danecioussmallwood20@gmail.com">danecioussmallwood20@gmail.com</a>. It runs a pilot of a household waste collection service. It is not a registered company and no real money is collected — Mobile Money runs in test (sandbox) mode.</p>
       <h3>What we collect</h3>
       <ul className="list-disc pl-5">
         <li>Account: name, email, phone number, role, language.</li>
@@ -17,7 +17,7 @@ export function PrivacyText() {
       <h3>How long</h3>
       <p>Until the end of the project (31 July 2027). Afterwards data is deleted or fully anonymised for the final report.</p>
       <h3>Your rights</h3>
-      <p>You may access, correct or delete your data, or withdraw consent at any time, by emailing <a className="underline" href="mailto:eg8217178@gmail.com">eg8217178@gmail.com</a>. Withdrawing does not affect the pilot records already anonymised.</p>
+      <p>You may access, correct or delete your data, or withdraw consent at any time, by emailing <a className="underline" href="mailto:danecioussmallwood20@gmail.com">danecioussmallwood20@gmail.com</a>. Withdrawing does not affect the pilot records already anonymised.</p>
     </div>
   );
 }

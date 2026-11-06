@@ -2,7 +2,7 @@
 
 A demand-driven household waste collection platform for Kigali that needs no hardware: residents report full bins, a model predicts which other bins are full, routes are optimised daily on real roads, every pickup is proven with QR + GPS + time, and sorting is rewarded with green points that reduce the monthly fee.
 
-Final year project (BSc ISM, 2026/2027). Everything runs on free tiers. Mobile Money and USSD use **sandbox (test) mode**; no real money moves.
+Final year project (BSc Software Engineering, 2026/2027). Everything runs on free tiers. Mobile Money and USSD use **sandbox (test) mode**; no real money moves.
 
 ## Try it
 

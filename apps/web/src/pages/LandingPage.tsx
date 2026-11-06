@@ -517,7 +517,7 @@ function DownloadCta() {
 
 // ───────── FAQ ─────────
 const FAQS = [
-  { q: 'Is this a real service?', a: 'It is a working pilot built as a final year project (BSc Information Systems Management, 2026/2027). The app, routes, QR verification and data are real, and it is being tested with real users.' },
+  { q: 'Is this a real service?', a: 'It is a working pilot built as a final year project (BSc Software Engineering, 2026/2027). The app, routes, QR verification and data are real, and it is being tested with real users.' },
   { q: 'Will I be charged real money?', a: 'No. During the pilot, Mobile Money runs in test (sandbox) mode, so no real money moves. Bills and green-point discounts are calculated exactly as they would be in a live service.' },
   { q: 'Do I need a smartphone?', a: 'No. The USSD menu lets you report a full bin, check your next pickup and your balance from any phone. The Android app adds truck tracking, the sorting assistant and the marketplace.' },
   { q: 'What happens to my location and data?', a: 'Your home location is used only to plan routes and verify pickups. Crews see only the houses on their route. Read the privacy notice for details.' },
@@ -581,7 +581,7 @@ function Footer() {
     <footer className="border-t border-border py-10">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-5 text-sm text-muted-fg sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-2 font-semibold text-fg"><Leaf className="size-4 text-primary-strong" aria-hidden /> Smart Waste</div>
-        <p>Final year project · BSc ISM 2026/2027 · Kigali, Rwanda</p>
+        <p>Final year project · BSc Software Engineering 2026/2027 · Kigali, Rwanda</p>
         <nav className="flex gap-5" aria-label="Footer">
           <Link to="/privacy" className="hover:text-fg">Privacy</Link>
           <Link to="/login" className="hover:text-fg">Sign in</Link>
