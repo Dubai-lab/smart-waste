@@ -12,6 +12,9 @@ import { dateTime, day, money, time } from '../../lib/format';
 import { Badge, Button, Card, IconCircle, QueryState, Row, Screen, Text } from '../../components/ui';
 import { font, useColors } from '../../lib/theme';
 
+/** Same window as public.has_live_sensor(): a sensor that checked in within 3 h reports full bins itself. */
+const SENSOR_LIVE_MS = 3 * 3600_000;
+
 export default function Home() {
   const c = useColors();
   const t = useT();
@@ -30,6 +33,8 @@ export default function Home() {
       { table: 'bin_sensors', filter: `household_id=eq.${household?.id}` }],
     [key, ['unread'], ['bin-sensor', household?.id]],
   );
+
+  const sensorLive = !!sensor.data?.last_seen_at && Date.now() - new Date(sensor.data.last_seen_at).getTime() < SENSOR_LIVE_MS;
 
   const report = useMutation({
     mutationFn: (type: 'bin_full' | 'extra_pickup') => q(supabase.from('bin_reports').insert({ household_id: household!.id, type, created_by: profile!.id, channel: 'app' }).select()),
@@ -66,7 +71,7 @@ export default function Home() {
                   <View style={{ flex: 1 }}>
                     <Text variant="caption" muted>{t('nextCollection')}</Text>
                     <Text variant="title">{s.next_collection ? day(s.next_collection) : 'Not scheduled yet'}</Text>
-                    <Text variant="small" muted>{s.zone ?? 'Waiting for zone assignment'} · or sooner if you report a full bin</Text>
+                    <Text variant="small" muted>{s.zone ?? 'Waiting for zone assignment'} · {sensorLive ? t('soonerSensor') : t('soonerReport')}</Text>
                   </View>
                 </Row>
               )}
@@ -100,7 +105,12 @@ export default function Home() {
                 <Badge tone="success" icon={CheckCircle2} label={t('reported')} />
               ) : (
                 <View style={{ gap: 10 }}>
-                  <Button title={t('binFull')} icon={Trash2} variant="accent" loading={report.isPending && report.variables === 'bin_full'} onPress={() => report.mutate('bin_full')} />
+                  {sensorLive ? (
+                    <Row>
+                      <IconCircle icon={RadioTower} color={c.primaryStrong} bg={c.primarySoft} size={36} />
+                      <Text variant="small" muted style={{ flex: 1 }}>{t('sensorReports')}</Text>
+                    </Row>
+                  ) : <Button title={t('binFull')} icon={Trash2} variant="accent" loading={report.isPending && report.variables === 'bin_full'} onPress={() => report.mutate('bin_full')} />}
                   <Button title={t('extraPickup')} icon={PackagePlus} variant="secondary" loading={report.isPending && report.variables === 'extra_pickup'} onPress={() => report.mutate('extra_pickup')} />
                 </View>
               )}

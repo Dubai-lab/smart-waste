@@ -17,6 +17,7 @@ const T = {
     none: 'No collection day set yet.',
     reported: 'Thank you. Your full bin is reported and will be planned for pickup.',
     already: 'Your bin is already reported. The crew will plan it.',
+    sensor: 'Your bin has a sensor. It reports automatically when the bin is full, so you do not need to.',
     missed: 'Missed pickup reported. The company must answer within 24 hours.',
     bill: (a: number, p: string) => `Bill ${p}: ${a} RWF\n1. Pay with MTN MoMo\n0. Back`,
     noBill: 'You have no unpaid bill. Thank you!',
@@ -32,6 +33,7 @@ const T = {
     none: 'Nta munsi wo gutwara uratangazwa.',
     reported: 'Murakoze. Ingunguru yuzuye yamenyeshejwe, izategurirwa gutwarwa.',
     already: 'Ingunguru yawe yaramenyeshejwe. Abakozi bazayitegura.',
+    sensor: 'Ingunguru yawe ifite sensa. Yimenyesha ubwayo iyo yuzuye, ntukeneye kubikora.',
     missed: 'Byamenyeshejwe. Ikigo kigomba gusubiza mu masaha 24.',
     bill: (a: number, p: string) => `Fagitire ${p}: ${a} RWF\n1. Ishyura na MTN MoMo\n0. Gusubira inyuma`,
     noBill: 'Nta fagitire mutarishyura. Murakoze!',
@@ -80,7 +82,10 @@ ussd.post('/', async (req, res) => {
     case '2': {
       const { data: open } = await admin.from('bin_reports').select('id').eq('household_id', house.id).in('status', ['open', 'scheduled']).limit(1);
       if (open?.length) return reply(`END ${t.already}`);
-      await admin.from('bin_reports').insert({ household_id: house.id, type: 'bin_full', channel: 'ussd', created_by: house.owner_id });
+      const { data: live } = await admin.rpc('has_live_sensor', { hid: house.id });
+      if (live) return reply(`END ${t.sensor}`);
+      const { error } = await admin.from('bin_reports').insert({ household_id: house.id, type: 'bin_full', channel: 'ussd', created_by: house.owner_id });
+      if (error) { console.error(error); return reply(`END ${error.hint === 'sensor_reports_full' ? t.sensor : t.invalid}`); }
       void sendSms(phoneNumber!, t.reported);
       return reply(`END ${t.reported}`);
     }
