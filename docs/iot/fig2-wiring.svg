@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1700" height="1120" viewBox="0 0 1700 1120" font-family="Fira Sans, Arial, sans-serif">
+  <defs>
+    <g id="gnd" stroke="#0F172A" stroke-width="3" stroke-linecap="round">
+      <line x1="0" y1="0" x2="0" y2="14"/><line x1="-16" y1="14" x2="16" y2="14"/><line x1="-10" y1="21" x2="10" y2="21"/><line x1="-4" y1="28" x2="4" y2="28"/>
+    </g>
+  </defs>
+  <rect width="1700" height="1120" fill="#FFFFFF"/>
+  <text x="60" y="66" font-size="34" font-weight="700" fill="#0F172A">Wiring of the bin sensor unit</text>
+  <text x="60" y="100" font-size="19" fill="#475569">ESP32 + JSN-SR04T ultrasonic sensor, powered by an 18650 battery with solar charging</text>
+
+  <g font-size="15" fill="#0F172A">
+    <!-- Solar panel -->
+    <rect x="60" y="140" width="220" height="110" rx="12" fill="#EFF6FF" stroke="#1E3A8A" stroke-width="2.5"/>
+    <text x="80" y="180" font-size="19" font-weight="700">Solar panel</text>
+    <text x="80" y="206" fill="#475569">6 V, 1–2 W (optional)</text>
+    <text x="262" y="180" text-anchor="end" font-weight="700">+</text><text x="262" y="220" text-anchor="end" font-weight="700">−</text>
+
+    <!-- Battery -->
+    <rect x="60" y="430" width="220" height="110" rx="12" fill="#FFFBEB" stroke="#B45309" stroke-width="2.5"/>
+    <text x="80" y="470" font-size="19" font-weight="700">18650 battery</text>
+    <text x="80" y="496" fill="#475569">Li-ion 3.7 V</text>
+    <text x="262" y="470" text-anchor="end" font-weight="700">+</text><text x="262" y="510" text-anchor="end" font-weight="700">−</text>
+
+    <!-- TP4056 -->
+    <rect x="400" y="140" width="240" height="400" rx="12" fill="#EEF2FF" stroke="#1D4ED8" stroke-width="2.5"/>
+    <text x="520" y="300" font-size="20" font-weight="700" text-anchor="middle">TP4056</text>
+    <text x="520" y="324" text-anchor="middle" fill="#475569">charger with</text>
+    <text x="520" y="344" text-anchor="middle" fill="#475569">battery protection</text>
+    <text x="414" y="180">IN+</text><text x="414" y="220">IN−</text>
+    <text x="414" y="470">B+</text><text x="414" y="510">B−</text>
+    <text x="626" y="265" text-anchor="end">OUT+</text><text x="626" y="335" text-anchor="end">OUT−</text>
+
+    <!-- MT3608 -->
+    <rect x="780" y="200" width="200" height="200" rx="12" fill="#F0FDF4" stroke="#15803D" stroke-width="2.5"/>
+    <text x="880" y="290" font-size="20" font-weight="700" text-anchor="middle">MT3608</text>
+    <text x="880" y="314" text-anchor="middle" fill="#475569">boost to 5 V</text>
+    <text x="794" y="265">VIN+</text><text x="794" y="335">VIN−</text>
+    <text x="966" y="265" text-anchor="end">VOUT+</text><text x="966" y="335" text-anchor="end">VOUT−</text>
+
+    <!-- ESP32 -->
+    <rect x="1100" y="110" width="320" height="420" rx="12" fill="#0F172A" stroke="#0F172A" stroke-width="2.5"/>
+    <rect x="1200" y="150" width="120" height="80" rx="6" fill="#94A3B8"/>
+    <text x="1260" y="196" font-size="15" text-anchor="middle" fill="#0F172A" font-weight="600">WiFi chip</text>
+    <text x="1260" y="300" font-size="24" font-weight="700" text-anchor="middle" fill="#FFFFFF">ESP32</text>
+    <text x="1260" y="326" text-anchor="middle" fill="#CBD5E1">DevKit board</text>
+    <text x="1114" y="185" fill="#E2E8F0">VIN</text>
+    <text x="1114" y="425" fill="#E2E8F0">GPIO34</text>
+    <g fill="#E2E8F0" text-anchor="middle" font-size="14">
+      <text x="1160" y="515">5V</text><text x="1240" y="515">GPIO5</text><text x="1320" y="515">GPIO18</text><text x="1390" y="515">GND</text>
+    </g>
+
+    <!-- JSN-SR04T -->
+    <rect x="1100" y="740" width="320" height="150" rx="12" fill="#F1F5F9" stroke="#334155" stroke-width="2.5"/>
+    <g text-anchor="middle" font-size="14"><text x="1160" y="766">5V</text><text x="1240" y="766">TRIG</text><text x="1320" y="766">ECHO</text><text x="1390" y="766">GND</text></g>
+    <text x="1260" y="826" font-size="20" font-weight="700" text-anchor="middle">JSN-SR04T</text>
+    <text x="1260" y="852" text-anchor="middle" fill="#475569">ultrasonic sensor board</text>
+    <path d="M1420 815 C 1460 815, 1470 815, 1500 815" stroke="#0F172A" stroke-width="4" fill="none"/>
+    <rect x="1500" y="790" width="56" height="50" rx="6" fill="#1F2937"/>
+    <ellipse cx="1556" cy="815" rx="6" ry="25" fill="#475569"/>
+    <text x="1528" y="870" text-anchor="middle" fill="#475569" font-size="14">probe (in lid)</text>
+  </g>
+
+  <!-- pin dots -->
+  <g fill="#0F172A">
+    <circle cx="280" cy="175" r="5"/><circle cx="280" cy="215" r="5"/><circle cx="280" cy="465" r="5"/><circle cx="280" cy="505" r="5"/>
+    <circle cx="400" cy="175" r="5"/><circle cx="400" cy="215" r="5"/><circle cx="400" cy="465" r="5"/><circle cx="400" cy="505" r="5"/>
+    <circle cx="640" cy="260" r="5"/><circle cx="640" cy="330" r="5"/><circle cx="780" cy="260" r="5"/><circle cx="780" cy="330" r="5"/>
+    <circle cx="980" cy="260" r="5"/><circle cx="980" cy="330" r="5"/>
+    <circle cx="1100" cy="180" r="5"/><circle cx="1100" cy="420" r="5"/>
+    <circle cx="1160" cy="530" r="5"/><circle cx="1240" cy="530" r="5"/><circle cx="1320" cy="530" r="5"/><circle cx="1390" cy="530" r="5"/>
+    <circle cx="1160" cy="740" r="5"/><circle cx="1240" cy="740" r="5"/><circle cx="1320" cy="740" r="5"/><circle cx="1390" cy="740" r="5"/>
+  </g>
+
+  <!-- wires -->
+  <g fill="none" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M280 175 H400" stroke="#DC2626"/>
+    <path d="M280 215 H400" stroke="#0F172A"/>
+    <path d="M280 465 H400" stroke="#EA580C"/>
+    <path d="M280 505 H400" stroke="#0F172A"/>
+    <path d="M640 260 H780" stroke="#EA580C"/>
+    <path d="M640 330 H780" stroke="#0F172A"/>
+    <path d="M980 260 H1040 V180 H1100" stroke="#DC2626"/>
+    <path d="M980 330 H1010 V350" stroke="#0F172A"/>
+    <path d="M1160 530 V740" stroke="#DC2626"/>
+    <path d="M1240 530 V740" stroke="#2563EB"/>
+    <path d="M1390 530 V740" stroke="#0F172A"/>
+    <!-- echo through divider -->
+    <path d="M1320 740 V705" stroke="#7C3AED"/>
+    <path d="M1320 705 l-12 -5 l24 -10 l-24 -10 l24 -10 l-24 -10 l12 -5" stroke="#7C3AED" stroke-width="3"/>
+    <path d="M1320 655 V530" stroke="#7C3AED"/>
+    <path d="M1320 600 H1338" stroke="#0F172A" stroke-width="3"/>
+    <path d="M1338 600 l5 -12 l10 24 l10 -24 l10 24 l5 -12 H1390" stroke="#0F172A" stroke-width="3"/>
+    <!-- battery sense divider -->
+    <path d="M700 260 V600" stroke="#EA580C"/>
+    <path d="M700 600 l-12 5 l24 10 l-24 10 l24 10 l-24 10 l12 5" stroke="#EA580C" stroke-width="3"/>
+    <path d="M700 650 V690" stroke="#16A34A"/>
+    <path d="M700 690 V730" stroke="#16A34A"/>
+    <path d="M700 730 l-12 5 l24 10 l-24 10 l24 10 l-24 10 l12 5" stroke="#0F172A" stroke-width="3"/>
+    <path d="M700 780 V800" stroke="#0F172A"/>
+    <path d="M700 690 H1060 V420 H1100" stroke="#16A34A"/>
+  </g>
+  <g fill="#0F172A"><circle cx="700" cy="260" r="6"/><circle cx="700" cy="690" r="6"/><circle cx="1320" cy="600" r="6"/><circle cx="1390" cy="600" r="6"/></g>
+  <use href="#gnd" x="1010" y="350"/>
+  <use href="#gnd" x="700" y="800"/>
+  <path d="M1390 660 H1450 V676" fill="none" stroke="#0F172A" stroke-width="4" stroke-linejoin="round"/>
+  <circle cx="1390" cy="660" r="6" fill="#0F172A"/>
+  <use href="#gnd" x="1450" y="676"/>
+
+  <!-- resistor labels -->
+  <g font-size="15" font-weight="600" fill="#0F172A">
+    <text x="1331" y="688" font-size="13">R1 1kΩ</text>
+    <text x="1356" y="582" text-anchor="middle" font-size="13">R2 2kΩ</text>
+    <text x="724" y="630">R3 100 kΩ</text>
+    <text x="724" y="760">R4 100 kΩ</text>
+  </g>
+
+  <!-- wire legend -->
+  <rect x="60" y="600" width="560" height="276" rx="14" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="88" y="640" font-size="20" font-weight="700" fill="#0F172A">Wires</text>
+  <g font-size="16" fill="#334155" stroke-linecap="round">
+    <line x1="88" y1="676" x2="128" y2="676" stroke="#DC2626" stroke-width="5"/><text x="142" y="682">5 V power (and solar +)</text>
+    <line x1="88" y1="710" x2="128" y2="710" stroke="#EA580C" stroke-width="5"/><text x="142" y="716">Battery 3.7–4.2 V</text>
+    <line x1="88" y1="744" x2="128" y2="744" stroke="#0F172A" stroke-width="5"/><text x="142" y="750">Ground (GND)</text>
+    <line x1="88" y1="778" x2="128" y2="778" stroke="#2563EB" stroke-width="5"/><text x="142" y="784">Trigger: ESP32 tells the sensor to send a pulse</text>
+    <line x1="88" y1="812" x2="128" y2="812" stroke="#7C3AED" stroke-width="5"/><text x="142" y="818">Echo: pulse length = distance</text>
+    <line x1="88" y1="846" x2="128" y2="846" stroke="#16A34A" stroke-width="5"/><text x="142" y="852">Battery level to the ESP32 (for the dashboard)</text>
+  </g>
+
+  <!-- notes -->
+  <rect x="60" y="900" width="1580" height="180" rx="14" fill="#F0FDFA" stroke="#99F6E4" stroke-width="2"/>
+  <text x="88" y="940" font-size="20" font-weight="700" fill="#0F172A">Notes</text>
+  <g font-size="17" fill="#334155">
+    <text x="88" y="976">• The sensor's Echo signal is 5 V but the ESP32 only takes 3.3 V: R1 (1 kΩ) and R2 (2 kΩ) bring it down safely.</text>
+    <text x="88" y="1008">• Set the MT3608 to 5.0 V with a multimeter before connecting the ESP32 and the sensor.</text>
+    <text x="88" y="1040">• R3 and R4 (100 kΩ each) halve the battery voltage so GPIO34 can read it; the unit reports low battery to the dashboard.</text>
+    <text x="88" y="1070">• All ground symbols are connected to the same ground (GND).</text>
+  </g>
+</svg>

@@ -13,6 +13,7 @@ const OverviewPage = lazy(() => import('./pages/OverviewPage'));
 const RoutesPage = lazy(() => import('./pages/RoutesPage'));
 const HouseholdsPage = lazy(() => import('./pages/HouseholdsPage'));
 const PickupsPage = lazy(() => import('./pages/PickupsPage'));
+const SensorsPage = lazy(() => import('./pages/SensorsPage'));
 const ComplaintsPage = lazy(() => import('./pages/ComplaintsPage'));
 const BillingPage = lazy(() => import('./pages/BillingPage'));
 const FleetPage = lazy(() => import('./pages/FleetPage'));
@@ -69,6 +70,7 @@ export function App() {
           <Route path="/overview" element={page(<OverviewPage />, STAFF)} />
           <Route path="/routes" element={page(<RoutesPage />, STAFF)} />
           <Route path="/households" element={page(<HouseholdsPage />, STAFF)} />
+          <Route path="/sensors" element={page(<SensorsPage />, STAFF)} />
           <Route path="/pickups" element={page(<PickupsPage />, [...STAFF, 'officer'])} />
           <Route path="/complaints" element={page(<ComplaintsPage />, [...STAFF, 'officer'])} />
           <Route path="/billing" element={page(<BillingPage />, STAFF)} />

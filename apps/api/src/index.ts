@@ -9,6 +9,7 @@ import { planning } from './routes/planning.js';
 import { jobs } from './routes/jobs.js';
 import { ussd } from './routes/ussd.js';
 import { adminUsers } from './routes/adminUsers.js';
+import { iot } from './routes/iot.js';
 
 const app = express();
 app.set('trust proxy', 1);
@@ -26,6 +27,7 @@ app.use('/payments', rateLimit({ windowMs: 60_000, limit: 20 }), payments);
 app.use('/planning', rateLimit({ windowMs: 60_000, limit: 10 }), planning);
 app.use('/jobs', jobs);
 app.use('/admin/users', rateLimit({ windowMs: 60_000, limit: 20 }), adminUsers);
+app.use('/iot', rateLimit({ windowMs: 60_000, limit: 60 }), iot);
 app.use('/ussd', rateLimit({ windowMs: 60_000, limit: 120 }), ussd);
 
 app.use((_req, res) => res.status(404).json({ error: 'Not found' }));

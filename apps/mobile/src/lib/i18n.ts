@@ -4,6 +4,7 @@ import { useAuth } from './auth';
 type Dict = Record<string, string>;
 const en: Dict = {
   home: 'Home', track: 'Track', pay: 'Pay', sort: 'Sort', more: 'More', route: 'Route', scan: 'Scan', sync: 'Sync',
+  binSensor: 'Bin sensor', binLevel: '{p}% full', sensorSeen: 'Checked {t}', sensorBattery: 'Sensor battery low',
   nextCollection: 'Next collection', binFull: 'My bin is full', extraPickup: 'Request extra pickup',
   reported: 'Reported — your pickup will be planned', points: 'Green points', worth: 'worth {v} RWF off your next bill',
   billDue: 'Bill due', allPaid: 'All bills paid', payNow: 'Pay with MoMo', today: 'Today', eta: 'Truck expected around {t}',
@@ -15,6 +16,7 @@ const en: Dict = {
 };
 const rw: Dict = {
   home: 'Ahabanza', track: 'Imodoka', pay: 'Kwishyura', sort: 'Gutandukanya', more: 'Ibindi', route: 'Urugendo', scan: 'Gusikana', sync: 'Kohereza',
+  binSensor: 'Sensa y’ingunguru', binLevel: 'Yuzuye {p}%', sensorSeen: 'Byarebwe {t}', sensorBattery: 'Bateri ya sensa iri hasi',
   nextCollection: 'Igihe bazatwara imyanda', binFull: 'Ingunguru yanjye yuzuye', extraPickup: 'Saba ko bayitwara',
   reported: 'Byoherejwe — bazateganya kuyitwara', points: 'Amanota y’ibidukikije', worth: 'agabanya {v} RWF kuri fagitire itaha',
   billDue: 'Fagitire itarishyurwa', allPaid: 'Fagitire zose zarishyuwe', payNow: 'Ishyura na MoMo', today: 'Uyu munsi', eta: 'Imodoka iteganyijwe saa {t}',
@@ -26,6 +28,7 @@ const rw: Dict = {
 };
 const fr: Dict = {
   home: 'Accueil', track: 'Camion', pay: 'Payer', sort: 'Trier', more: 'Plus', route: 'Tournée', scan: 'Scanner', sync: 'Synchro',
+  binSensor: 'Capteur de poubelle', binLevel: 'Pleine à {p} %', sensorSeen: 'Mesuré {t}', sensorBattery: 'Batterie du capteur faible',
   nextCollection: 'Prochaine collecte', binFull: 'Ma poubelle est pleine', extraPickup: 'Demander une collecte',
   reported: 'Signalé — la collecte sera planifiée', points: 'Points verts', worth: 'soit {v} RWF de réduction',
   billDue: 'Facture à payer', allPaid: 'Factures réglées', payNow: 'Payer avec MoMo', today: 'Aujourd’hui', eta: 'Camion prévu vers {t}',

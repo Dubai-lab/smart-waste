@@ -26,9 +26,19 @@ export default function RegisterHousehold() {
     try {
       const perm = await Location.requestForegroundPermissionsAsync();
       if (!perm.granted) { setErrors((e) => ({ ...e, location: 'Allow location, or tap your house on the map' })); return; }
-      const p = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.High });
-      setPos({ lat: p.coords.latitude, lng: p.coords.longitude, acc: p.coords.accuracy ?? undefined });
-      setGpsFix((n) => n + 1);
+      const use = (p: Location.LocationObject) => {
+        setPos({ lat: p.coords.latitude, lng: p.coords.longitude, acc: p.coords.accuracy ?? undefined });
+        setGpsFix((n) => n + 1);
+      };
+      // Show a recent fix straight away, then try for a fresh one for at most 15 s (iOS can hang indoors).
+      const last = await Location.getLastKnownPositionAsync({ maxAge: 120_000 });
+      if (last) use(last);
+      const fresh = await Promise.race([
+        Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.High }),
+        new Promise<null>((r) => setTimeout(() => r(null), 15_000)),
+      ]);
+      if (fresh) use(fresh);
+      else if (!last) throw new Error('timeout');
     } catch {
       setErrors((e) => ({ ...e, location: 'Could not get GPS. Tap your house on the map instead.' }));
     } finally { setLocating(false); }

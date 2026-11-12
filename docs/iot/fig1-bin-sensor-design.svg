@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" font-family="Fira Sans, Arial, sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#334155"/></marker>
+    <pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="10" stroke="#94A3B8" stroke-width="2" opacity=".45"/></pattern>
+    <clipPath id="binInside"><path d="M180 340 L620 340 L590 900 L210 900 Z"/></clipPath>
+  </defs>
+  <rect width="1600" height="1000" fill="#FFFFFF"/>
+
+  <text x="60" y="70" font-size="34" font-weight="700" fill="#0F172A">Smart bin sensor unit</text>
+  <text x="60" y="104" font-size="19" fill="#475569">Cut-away view of a household bin fitted with the IoT fill-level sensor</text>
+
+  <!-- WiFi waves -->
+  <g transform="translate(122 246)" fill="none" stroke="#0D9488" stroke-width="5" stroke-linecap="round">
+    <path d="M-34 -6 A48 48 0 0 1 34 -6"/>
+    <path d="M-22 6 A31 31 0 0 1 22 6"/>
+    <path d="M-10 18 A14 14 0 0 1 10 18"/>
+    <circle cx="0" cy="30" r="4" fill="#0D9488" stroke="none"/>
+  </g>
+  <path d="M140 285 Q 180 320 215 352" fill="none" stroke="#0D9488" stroke-width="2" stroke-dasharray="5 6"/>
+
+  <!-- Solar panel on the lid -->
+  <rect x="300" y="300" width="8" height="12" fill="#475569"/>
+  <rect x="492" y="300" width="8" height="12" fill="#475569"/>
+  <g>
+    <rect x="250" y="280" width="300" height="22" rx="3" fill="#1E3A8A" stroke="#0F172A" stroke-width="2"/>
+    <g stroke="#93C5FD" stroke-width="1.2" opacity=".7">
+      <line x1="300" y1="281" x2="300" y2="301"/><line x1="350" y1="281" x2="350" y2="301"/><line x1="400" y1="281" x2="400" y2="301"/>
+      <line x1="450" y1="281" x2="450" y2="301"/><line x1="500" y1="281" x2="500" y2="301"/><line x1="251" y1="291" x2="549" y2="291"/>
+    </g>
+  </g>
+
+  <!-- Lid -->
+  <rect x="160" y="310" width="480" height="32" rx="8" fill="#0F766E" stroke="#134E4A" stroke-width="2"/>
+  <rect x="640" y="318" width="22" height="16" rx="4" fill="#134E4A"/>
+
+  <!-- Bin body (cut-away) -->
+  <path d="M180 340 L620 340 L590 900 L210 900 Z" fill="#F1F5F9" stroke="#475569" stroke-width="3"/>
+  <g clip-path="url(#binInside)">
+    <!-- blind zone band -->
+    <rect x="170" y="368" width="460" height="133" fill="url(#hatch)"/>
+    <!-- rubbish -->
+    <path d="M190 652 C 240 622, 280 628, 320 645 S 400 628, 440 638 S 520 626, 560 646 S 600 644, 615 650 L 600 905 L 200 905 Z" fill="#D6D3D1" stroke="#78716C" stroke-width="2"/>
+    <ellipse cx="262" cy="700" rx="42" ry="28" fill="#0D9488" opacity=".55"/>
+    <ellipse cx="432" cy="690" rx="48" ry="30" fill="#D97706" opacity=".55"/>
+    <ellipse cx="352" cy="780" rx="52" ry="30" fill="#64748B" opacity=".5"/>
+    <ellipse cx="520" cy="772" rx="42" ry="26" fill="#15803D" opacity=".45"/>
+    <ellipse cx="270" cy="850" rx="46" ry="26" fill="#A8A29E" opacity=".6"/>
+    <ellipse cx="480" cy="855" rx="54" ry="28" fill="#0D9488" opacity=".35"/>
+    <!-- ultrasonic beam -->
+    <path d="M400 370 L318 640 L482 638 Z" fill="#14B8A6" opacity=".14"/>
+    <path d="M400 370 L318 640 M400 370 L482 638" stroke="#0D9488" stroke-width="2" stroke-dasharray="6 6"/>
+    <g fill="none" stroke="#0D9488" stroke-width="2" opacity=".6">
+      <path d="M372 420 Q400 432 428 420"/><path d="M357 470 Q400 488 443 470"/><path d="M342 520 Q400 542 458 520"/>
+    </g>
+    <!-- full line -->
+    <line x1="170" y1="528" x2="630" y2="528" stroke="#D97706" stroke-width="3" stroke-dasharray="12 8"/>
+  </g>
+  <path d="M180 340 L620 340 L590 900 L210 900 Z" fill="none" stroke="#475569" stroke-width="3"/>
+  <text x="560" y="520" font-size="15" font-weight="600" fill="#B45309" text-anchor="end">FULL</text>
+  <text x="225" y="494" font-size="14" fill="#64748B">blind zone ~25 cm</text>
+
+  <!-- Wheels -->
+  <circle cx="240" cy="912" r="26" fill="#1F2937"/><circle cx="240" cy="912" r="9" fill="#9CA3AF"/>
+  <circle cx="560" cy="912" r="26" fill="#1F2937"/><circle cx="560" cy="912" r="9" fill="#9CA3AF"/>
+
+  <!-- Electronics box under the lid -->
+  <rect x="205" y="350" width="132" height="74" rx="8" fill="#FFFFFF" stroke="#0F766E" stroke-width="2.5"/>
+  <rect x="216" y="361" width="42" height="20" rx="3" fill="#1D4ED8"/>
+  <text x="237" y="375" font-size="10" fill="#FFFFFF" text-anchor="middle" font-weight="600">TP4056</text>
+  <rect x="216" y="391" width="54" height="22" rx="10" fill="#F59E0B" stroke="#B45309" stroke-width="1.5"/>
+  <text x="243" y="406" font-size="10" fill="#451A03" text-anchor="middle" font-weight="600">18650</text>
+  <rect x="270" y="361" width="58" height="52" rx="4" fill="#0F172A"/>
+  <rect x="280" y="372" width="30" height="22" rx="2" fill="#94A3B8"/>
+  <path d="M314 366 h8 v6 h-6 v6 h6" fill="none" stroke="#E2E8F0" stroke-width="1.5"/>
+  <text x="299" y="406" font-size="9" fill="#E2E8F0" text-anchor="middle" font-weight="600">ESP32</text>
+  <!-- cables -->
+  <path d="M320 312 L320 350" stroke="#1F2937" stroke-width="3"/>
+  <path d="M337 380 C 360 380, 370 352, 386 352" fill="none" stroke="#1F2937" stroke-width="3"/>
+
+  <!-- Ultrasonic probe -->
+  <rect x="386" y="342" width="28" height="24" rx="3" fill="#1F2937"/>
+  <ellipse cx="400" cy="367" rx="14" ry="4" fill="#475569"/>
+
+  <!-- distance d -->
+  <line x1="442" y1="374" x2="442" y2="630" stroke="#334155" stroke-width="2" marker-start="url(#ar)" marker-end="url(#ar)"/>
+  <rect x="452" y="566" width="30" height="28" rx="6" fill="#FFFFFF" stroke="#334155" stroke-width="1.5"/>
+  <text x="467" y="587" font-size="20" font-weight="700" fill="#0F172A" text-anchor="middle" font-style="italic">d</text>
+
+  <!-- bin height H -->
+  <line x1="660" y1="368" x2="700" y2="368" stroke="#334155" stroke-width="1.5"/>
+  <line x1="600" y1="900" x2="700" y2="900" stroke="#334155" stroke-width="1.5"/>
+  <line x1="688" y1="372" x2="688" y2="896" stroke="#334155" stroke-width="2" marker-start="url(#ar)" marker-end="url(#ar)"/>
+  <rect x="700" y="618" width="34" height="30" rx="6" fill="#FFFFFF" stroke="#334155" stroke-width="1.5"/>
+  <text x="717" y="641" font-size="20" font-weight="700" fill="#0F172A" text-anchor="middle" font-style="italic">H</text>
+
+  <!-- numbered markers -->
+  <g font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">
+    <line x1="602" y1="262" x2="545" y2="284" stroke="#0F766E" stroke-width="2"/>
+    <circle cx="616" cy="256" r="17" fill="#0F766E"/><text x="616" y="262">1</text>
+    <line x1="150" y1="398" x2="205" y2="390" stroke="#0F766E" stroke-width="2"/>
+    <circle cx="134" cy="400" r="17" fill="#0F766E"/><text x="134" y="406">2</text>
+    <line x1="500" y1="356" x2="416" y2="352" stroke="#0F766E" stroke-width="2"/>
+    <circle cx="516" cy="356" r="17" fill="#0F766E"/><text x="516" y="362">3</text>
+    <circle cx="500" cy="580" r="17" fill="#0F766E"/><text x="500" y="586">4</text>
+    <line x1="150" y1="528" x2="190" y2="528" stroke="#0F766E" stroke-width="2"/>
+    <circle cx="134" cy="528" r="17" fill="#0F766E"/><text x="134" y="534">5</text>
+    <circle cx="70" cy="216" r="17" fill="#0F766E"/><text x="70" y="222">6</text>
+  </g>
+
+  <!-- Parts legend -->
+  <rect x="800" y="150" width="740" height="500" rx="16" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="832" y="196" font-size="22" font-weight="700" fill="#0F172A">Parts</text>
+  <g font-size="17">
+    <g transform="translate(832 234)">
+      <circle cx="16" cy="0" r="16" fill="#0F766E"/><text x="16" y="6" fill="#FFF" font-weight="700" text-anchor="middle">1</text>
+      <text x="48" y="-4" font-weight="700" fill="#0F172A">Solar panel (6 V, 1–2 W)</text>
+      <text x="48" y="20" fill="#475569">Charges the battery in daylight. Optional for the demo.</text>
+    </g>
+    <g transform="translate(832 306)">
+      <circle cx="16" cy="0" r="16" fill="#0F766E"/><text x="16" y="6" fill="#FFF" font-weight="700" text-anchor="middle">2</text>
+      <text x="48" y="-4" font-weight="700" fill="#0F172A">Electronics box</text>
+      <text x="48" y="20" fill="#475569">ESP32, 18650 battery and charger, kept dry under the lid.</text>
+    </g>
+    <g transform="translate(832 378)">
+      <circle cx="16" cy="0" r="16" fill="#0F766E"/><text x="16" y="6" fill="#FFF" font-weight="700" text-anchor="middle">3</text>
+      <text x="48" y="-4" font-weight="700" fill="#0F172A">Ultrasonic sensor (JSN-SR04T)</text>
+      <text x="48" y="20" fill="#475569">Waterproof probe fixed in the lid, pointing down.</text>
+    </g>
+    <g transform="translate(832 450)">
+      <circle cx="16" cy="0" r="16" fill="#0F766E"/><text x="16" y="6" fill="#FFF" font-weight="700" text-anchor="middle">4</text>
+      <text x="48" y="-4" font-weight="700" fill="#0F172A">Distance d</text>
+      <text x="48" y="20" fill="#475569">The sound pulse bounces off the rubbish; its travel time gives d.</text>
+    </g>
+    <g transform="translate(832 522)">
+      <circle cx="16" cy="0" r="16" fill="#0F766E"/><text x="16" y="6" fill="#FFF" font-weight="700" text-anchor="middle">5</text>
+      <text x="48" y="-4" font-weight="700" fill="#0F172A">Full line</text>
+      <text x="48" y="20" fill="#475569">When d ≤ 30 cm the bin is reported as full.</text>
+    </g>
+    <g transform="translate(832 594)">
+      <circle cx="16" cy="0" r="16" fill="#0F766E"/><text x="16" y="6" fill="#FFF" font-weight="700" text-anchor="middle">6</text>
+      <text x="48" y="-4" font-weight="700" fill="#0F172A">WiFi</text>
+      <text x="48" y="20" fill="#475569">Sends d and the battery level every 30–60 min, then sleeps.</text>
+    </g>
+  </g>
+
+  <!-- Formula -->
+  <rect x="800" y="680" width="740" height="230" rx="16" fill="#F0FDFA" stroke="#99F6E4" stroke-width="2"/>
+  <text x="832" y="724" font-size="22" font-weight="700" fill="#0F172A">How the fill level is calculated</text>
+  <text x="832" y="772" font-size="26" font-weight="600" fill="#0F766E">Fill % = (H − d) ÷ H × 100</text>
+  <text x="832" y="814" font-size="17" fill="#334155">H = distance from the sensor to the bottom of the empty bin (measured once).</text>
+  <text x="832" y="846" font-size="17" fill="#334155">Example: H = 100 cm, d = 51 cm → (100 − 51) ÷ 100 = 49% full.</text>
+  <text x="832" y="878" font-size="17" fill="#334155">The sensor cannot measure closer than ~25 cm, so “full” is set at d ≤ 30 cm.</text>
+
+  <text x="60" y="970" font-size="15" fill="#64748B">Smart Household Waste Collection Management System · IoT fill-level extension (design)</text>
+</svg>

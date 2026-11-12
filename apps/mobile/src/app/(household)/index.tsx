@@ -2,13 +2,13 @@ import { useState } from 'react';
 import { View } from 'react-native';
 import { router } from 'expo-router';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Bell, CalendarDays, CheckCircle2, Gift, PackagePlus, Trash2, Truck, Wallet } from 'lucide-react-native';
+import { BatteryLow, Bell, CalendarDays, CheckCircle2, Gift, PackagePlus, RadioTower, Trash2, Truck, Wallet } from 'lucide-react-native';
 import type { HouseholdSummary } from '@sw/shared';
 import { supabase, q } from '../../lib/supabase';
 import { useAuth } from '../../lib/auth';
 import { useT } from '../../lib/i18n';
 import { useRealtimeInvalidate } from '../../lib/useRealtime';
-import { day, money, time } from '../../lib/format';
+import { dateTime, day, money, time } from '../../lib/format';
 import { Badge, Button, Card, IconCircle, QueryState, Row, Screen, Text } from '../../components/ui';
 import { font, useColors } from '../../lib/theme';
 
@@ -20,10 +20,15 @@ export default function Home() {
   const [msg, setMsg] = useState<string | null>(null);
   const key = ['summary', household?.id];
   const summary = useQuery({ queryKey: key, enabled: !!household, queryFn: () => q(supabase.rpc('household_summary', { hid: household!.id })) as Promise<HouseholdSummary> });
+  const sensor = useQuery({
+    queryKey: ['bin-sensor', household?.id], enabled: !!household,
+    queryFn: async () => (await supabase.from('bin_sensors').select('last_fill_pct, last_battery_v, last_seen_at').eq('household_id', household!.id).maybeSingle()).data,
+  });
   const unread = useQuery({ queryKey: ['unread'], queryFn: async () => (await supabase.from('notifications').select('id', { count: 'exact', head: true }).is('read_at', null)).count ?? 0 });
   useRealtimeInvalidate(
-    [{ table: 'route_stops', filter: `household_id=eq.${household?.id}` }, { table: 'notifications', filter: `user_id=eq.${profile?.id}` }, { table: 'invoices', filter: `household_id=eq.${household?.id}` }],
-    [key, ['unread']],
+    [{ table: 'route_stops', filter: `household_id=eq.${household?.id}` }, { table: 'notifications', filter: `user_id=eq.${profile?.id}` }, { table: 'invoices', filter: `household_id=eq.${household?.id}` },
+      { table: 'bin_sensors', filter: `household_id=eq.${household?.id}` }],
+    [key, ['unread'], ['bin-sensor', household?.id]],
   );
 
   const report = useMutation({
@@ -33,7 +38,7 @@ export default function Home() {
   });
 
   return (
-    <Screen refreshing={summary.isRefetching} onRefresh={() => { void summary.refetch(); void unread.refetch(); }}>
+    <Screen refreshing={summary.isRefetching} onRefresh={() => { void summary.refetch(); void unread.refetch(); void sensor.refetch(); }}>
       <Row style={{ justifyContent: 'space-between' }}>
         <View style={{ flex: 1 }}>
           <Text variant="small" muted>Muraho, {profile?.full_name?.split(' ')[0] ?? ''}</Text>
@@ -66,6 +71,29 @@ export default function Home() {
                 </Row>
               )}
             </Card>
+
+            {sensor.data?.last_fill_pct != null && (() => {
+              const fill = Math.round(sensor.data.last_fill_pct);
+              const tone = fill >= 90 ? c.danger : fill >= 60 ? c.warning : c.primary;
+              return (
+                <Card index={1}>
+                  <Row>
+                    <IconCircle icon={RadioTower} color={c.primaryStrong} bg={c.primarySoft} size={36} />
+                    <View style={{ flex: 1 }}>
+                      <Text variant="caption" muted>{t('binSensor')}</Text>
+                      <Text variant="title">{t('binLevel', { p: fill })}</Text>
+                    </View>
+                    <Text variant="small" muted>{t('sensorSeen', { t: dateTime(sensor.data.last_seen_at) })}</Text>
+                  </Row>
+                  <View accessibilityRole="progressbar" accessibilityValue={{ min: 0, max: 100, now: fill }}
+                    style={{ height: 8, borderRadius: 4, backgroundColor: c.muted, overflow: 'hidden' }}>
+                    <View style={{ width: `${fill}%`, height: '100%', borderRadius: 4, backgroundColor: tone }} />
+                  </View>
+                  {sensor.data.last_battery_v != null && sensor.data.last_battery_v > 1 && sensor.data.last_battery_v < 3.4 &&
+                    <Badge tone="warning" icon={BatteryLow} label={t('sensorBattery')} />}
+                </Card>
+              );
+            })()}
 
             <Card index={1}>
               {s.open_report ? (

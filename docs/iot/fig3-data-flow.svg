@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="600" viewBox="0 0 1600 600" font-family="Fira Sans, Arial, sans-serif">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#0F766E"/></marker>
+  </defs>
+  <rect width="1600" height="600" fill="#FFFFFF"/>
+  <text x="60" y="66" font-size="34" font-weight="700" fill="#0F172A">How a bin reading reaches the system</text>
+  <text x="60" y="100" font-size="19" fill="#475569">From the sensor in the lid to tomorrow's collection route</text>
+
+  <g font-size="16" fill="#475569" text-anchor="middle">
+    <!-- 1 sensor -->
+    <rect x="60" y="150" width="240" height="290" rx="16" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+    <g transform="translate(180 222)">
+      <rect x="-34" y="-30" width="68" height="12" rx="4" fill="#0F766E"/>
+      <path d="M-30 -18 L30 -18 L24 34 L-24 34 Z" fill="#E2E8F0" stroke="#475569" stroke-width="2.5"/>
+      <rect x="-6" y="-18" width="12" height="9" fill="#1F2937"/>
+      <path d="M0 -9 L-12 14 L12 14 Z" fill="#14B8A6" opacity=".35"/>
+    </g>
+    <text x="180" y="300" font-size="20" font-weight="700" fill="#0F172A">1 · Bin sensor</text>
+    <text x="180" y="334">Measures distance d</text>
+    <text x="180" y="358">every 30–60 minutes,</text>
+    <text x="180" y="382">then goes back to sleep</text>
+
+    <!-- 2 wifi -->
+    <rect x="372" y="150" width="240" height="290" rx="16" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+    <g transform="translate(492 230)" fill="none" stroke="#0D9488" stroke-width="6" stroke-linecap="round">
+      <path d="M-40 -8 A56 56 0 0 1 40 -8"/><path d="M-26 6 A36 36 0 0 1 26 6"/><path d="M-12 20 A16 16 0 0 1 12 20"/>
+      <circle cx="0" cy="33" r="5" fill="#0D9488" stroke="none"/>
+    </g>
+    <text x="492" y="300" font-size="20" font-weight="700" fill="#0F172A">2 · WiFi</text>
+    <text x="492" y="334">Home router or a</text>
+    <text x="492" y="358">phone hotspot</text>
+
+    <!-- 3 API -->
+    <rect x="684" y="150" width="240" height="290" rx="16" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+    <g transform="translate(804 226)">
+      <path d="M-44 22 a24 24 0 0 1 6 -46 a32 32 0 0 1 60 -4 a22 22 0 0 1 22 50 z" fill="#CCFBF1" stroke="#0F766E" stroke-width="3"/>
+      <path d="M-10 -4 l-10 10 l10 10 M10 -4 l10 10 l-10 10" fill="none" stroke="#0F766E" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <text x="804" y="300" font-size="20" font-weight="700" fill="#0F172A">3 · Smart Waste API</text>
+    <text x="804" y="334">Checks the device's</text>
+    <text x="804" y="358">secret key and</text>
+    <text x="804" y="382">accepts the reading</text>
+
+    <!-- 4 DB -->
+    <rect x="996" y="150" width="240" height="290" rx="16" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+    <g transform="translate(1116 222)" stroke="#0F766E" stroke-width="3" fill="#CCFBF1">
+      <path d="M-32 -26 v52 a32 10 0 0 0 64 0 v-52"/>
+      <ellipse cx="0" cy="-26" rx="32" ry="10"/>
+      <path d="M-32 0 a32 10 0 0 0 64 0" fill="none"/>
+    </g>
+    <text x="1116" y="300" font-size="20" font-weight="700" fill="#0F172A">4 · Database</text>
+    <text x="1116" y="334">Saves fill % and battery.</text>
+    <text x="1116" y="358">At the full line it adds</text>
+    <text x="1116" y="382">a “bin full” report</text>
+
+    <!-- 5 planning -->
+    <rect x="1308" y="150" width="240" height="290" rx="16" fill="#F0FDFA" stroke="#0F766E" stroke-width="2.5"/>
+    <g transform="translate(1428 222)">
+      <path d="M-36 24 C -20 -6, 0 30, 14 -4 S 30 -20, 38 -26" fill="none" stroke="#D97706" stroke-width="4" stroke-dasharray="2 7" stroke-linecap="round"/>
+      <circle cx="-36" cy="24" r="8" fill="#0F766E"/><circle cx="14" cy="-4" r="8" fill="#0F766E"/>
+      <path d="M38 -44 a12 12 0 0 1 12 12 c0 9 -12 20 -12 20 s-12 -11 -12 -20 a12 12 0 0 1 12 -12 z" fill="#DC2626"/>
+      <circle cx="38" cy="-32" r="4" fill="#FFF"/>
+    </g>
+    <text x="1428" y="300" font-size="20" font-weight="700" fill="#0F172A">5 · Route planning</text>
+    <text x="1428" y="334">Full bins join the next</text>
+    <text x="1428" y="358">optimised route; the</text>
+    <text x="1428" y="382">manager sees fill %</text>
+  </g>
+
+  <!-- arrows -->
+  <g stroke="#0F766E" stroke-width="3.5" marker-end="url(#ah)">
+    <line x1="304" y1="295" x2="366" y2="295"/>
+    <line x1="616" y1="295" x2="678" y2="295"/>
+    <line x1="928" y1="295" x2="990" y2="295"/>
+    <line x1="1240" y1="295" x2="1302" y2="295"/>
+  </g>
+  <g font-size="14" fill="#0F766E" font-weight="600" text-anchor="middle">
+    <text x="336" y="280">d, battery</text>
+    <text x="648" y="280">HTTPS</text>
+    <text x="960" y="280">reading</text>
+    <text x="1272" y="280">full bins</text>
+  </g>
+
+  <rect x="60" y="480" width="1488" height="76" rx="14" fill="#FFFBEB" stroke="#FCD34D" stroke-width="2"/>
+  <text x="88" y="526" font-size="18" fill="#78350F"><tspan font-weight="700">Backup:</tspan> if a sensor stops sending (flat battery, no WiFi), the system's sensorless prediction still decides whether that bin is collected.</text>
+</svg>

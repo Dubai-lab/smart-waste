@@ -3,7 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'motion/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import {
-  BarChart3, Bell, Building2, ClipboardList, Gauge, Home, LogOut, Map, Menu, Moon, Recycle, Route, ScanLine,
+  BarChart3, Bell, Building2, ClipboardList, Gauge, Home, LogOut, Map, Menu, Moon, RadioTower, Recycle, Route, ScanLine,
   Settings, ShieldCheck, Sun, Truck, Users, Wallet, X, type LucideIcon,
 } from 'lucide-react';
 import { ROLE_LABELS, type UserRole } from '@sw/shared';
@@ -19,6 +19,7 @@ const NAV: NavItem[] = [
   { to: '/authority', label: 'Authority view', icon: ShieldCheck, roles: ['officer', 'manager', 'admin'] },
   { to: '/routes', label: 'Routes & planning', icon: Route, roles: ['manager', 'admin'] },
   { to: '/households', label: 'Households', icon: Home, roles: ['manager', 'admin'] },
+  { to: '/sensors', label: 'Bin sensors', icon: RadioTower, roles: ['manager', 'admin'] },
   { to: '/pickups', label: 'Proof of service', icon: ScanLine, roles: ['manager', 'admin', 'officer'] },
   { to: '/complaints', label: 'Complaints', icon: ClipboardList, roles: ['manager', 'admin', 'officer'] },
   { to: '/billing', label: 'Billing', icon: Wallet, roles: ['manager', 'admin'] },
