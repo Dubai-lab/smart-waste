@@ -66,8 +66,13 @@ void setup() {
   delay(200);
   bootCount++;
   sensorBegin();
+  delay(500);                         // the AJ-SR04M needs a moment after power-up before its first ping
 
-  float distance = readDistance(7);   // measure before the radio is on
+  // Measure before the radio is on. The AJ-SR04M can miss its first pings after a wake-up, so keep trying for up to 5 s.
+  float distance = -1;
+  uint32_t t0 = millis();
+  while (distance < 0 && millis() - t0 < 5000) distance = readDistance(7);
+  Serial.printf("\nMeasured in %lu ms\n", (unsigned long)(millis() - t0));
   float battery = readBattery();
   Serial.printf("\nWake #%lu  distance: %.1f cm  battery: %.2f V\n", (unsigned long)bootCount, distance, battery);
 
